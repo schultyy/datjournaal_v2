@@ -22,7 +22,6 @@ defmodule Datjournaal.Image do
   # def filename(version, {file, _}), do: "#{version}-#{file.file_name}"
   def filename(version, {file, _}) do
     ext_name = Path.extname(file.file_name)
-    IO.inspect "BASE NAME #{Path.basename(file.file_name, ext_name)}"
     "#{version}-#{Path.basename(file.file_name, ext_name)}"
   end
 
