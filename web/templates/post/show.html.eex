@@ -9,7 +9,7 @@
 
   <li>
     <strong>Image:</strong>
-    <%= @post.image %>
+    <img src="<%= photo_url(@post) %>" />
   </li>
 
   <li>

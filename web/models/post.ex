@@ -1,9 +1,10 @@
 defmodule Datjournaal.Post do
   use Datjournaal.Web, :model
+  use Arc.Ecto.Schema
 
   schema "posts" do
     field :description, :string
-    field :image, :string
+    field :image, Datjournaal.Image.Type
     field :slug, :string
 
     timestamps()
@@ -14,7 +15,8 @@ defmodule Datjournaal.Post do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:description, :image, :slug])
+    |> cast(params, [:description, :slug])
+    |> cast_attachments(params, [:image])
     |> validate_required([:description, :image, :slug])
   end
 end

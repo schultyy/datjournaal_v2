@@ -19,7 +19,7 @@ defmodule Datjournaal.Mixfile do
   def application do
     [mod: {Datjournaal, []},
      applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex]]
+                    :phoenix_ecto, :postgrex, :arc_ecto]]
   end
 
   # Specifies which paths to compile per environment.
@@ -38,7 +38,8 @@ defmodule Datjournaal.Mixfile do
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:gettext, "~> 0.11"},
      {:cowboy, "~> 1.0"},
-     {:arc, "~> 0.7.0"}]
+     {:arc, "~> 0.7.0"},
+     {:arc_ecto, "~> 0.6.0"}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.
