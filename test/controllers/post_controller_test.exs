@@ -35,7 +35,7 @@ defmodule Datjournaal.PostControllerTest do
 
   test "shows chosen resource", %{conn: conn} do
     post = Repo.insert! Post.changeset(%Post{}, @valid_attrs)
-    conn = get conn, post_path(conn, :show, post)
+    conn = get conn, post_path(conn, :show, post.slug)
     assert html_response(conn, 200) =~ "Show post"
   end
 

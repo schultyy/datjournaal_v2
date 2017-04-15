@@ -17,7 +17,8 @@ defmodule Datjournaal.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PostController, :index
-    resources "/posts", PostController, only: [:show, :create, :delete, :new]
+    resources "/posts", PostController, only: [:create, :delete, :new]
+    get "/:slug", PostController, :show
   end
 
   # Other scopes may use custom stacks.
