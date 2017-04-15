@@ -1,0 +1,22 @@
+<h2>Show post</h2>
+
+<ul>
+
+  <li>
+    <strong>Description:</strong>
+    <%= @post.description %>
+  </li>
+
+  <li>
+    <strong>Image:</strong>
+    <img src="<%= photo_url(@post) %>" />
+  </li>
+
+  <li>
+    <strong>Slug:</strong>
+    <%= @post.slug %>
+  </li>
+
+</ul>
+
+<%= link "Back", to: post_path(@conn, :index) %>
