@@ -18,5 +18,15 @@ defmodule Datjournaal.User do
     struct
     |> cast(params, [:email, :name, :password_hash, :is_admin])
     |> validate_required([:email, :name, :password_hash, :is_admin])
+    |> validate_length(:password, min: 6)
+    |> hash_password
   end
+
+  defp hash_password(changeset) do
+    case changeset do
+      %Ecto.Changeset{valid?: true, changes: %{password: password}} ->
+        put_change(changeset, :password_hash, Comeonin.Bcrypt.hashpwsalt(password))
+      _ ->
+        changeset
+    end
 end
