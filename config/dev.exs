@@ -33,10 +33,11 @@ config :logger, :console, format: "[$level] $message\n"
 config :phoenix, :stacktrace_depth, 20
 
 # Configure your database
+
 config :datjournaal, Datjournaal.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "postgres",
+  username: System.get_env("PG_USERNAME"),
+  password: System.get_env("PG_PASSWORD"),
+  hostname: System.get_env("PG_HOST"),
   database: "datjournaal_dev",
-  hostname: "localhost",
   pool_size: 10

@@ -1,0 +1,38 @@
+web:
+  build: .
+  dockerfile: Dockerfile
+  command: mix phoenix.server
+  environment:
+    - MIX_ENV=dev
+    - PORT=4000
+    - PG_HOST=postgres
+    - PG_USERNAME=postgres
+  volumes:
+    - .:/app
+  ports:
+    - "4000:4000"
+  links:
+    - postgres
+
+test:
+  image: datjournaal_web
+  command: mix test
+  environment:
+    - MIX_ENV=test
+    - PORT=4000
+    - PG_HOST=postgres
+    - PG_USERNAME=postgres
+  volumes_from:
+    - web
+  links:
+    - postgres
+
+postgres:
+  image: postgres:9.5
+  volumes:
+    - postgres_data:/var/lib/postgresql
+  ports:
+    - "5432"
+  environment:
+    - PG_HOST=postgres
+    - PG_USERNAME=postgres
