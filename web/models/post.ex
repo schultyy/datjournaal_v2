@@ -15,8 +15,8 @@ defmodule Datjournaal.Post do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:description, :slug])
+    |> cast(params, [:description])
     |> cast_attachments(params, [:image])
-    |> validate_required([:description, :image, :slug])
+    |> validate_required([:image])
   end
 end

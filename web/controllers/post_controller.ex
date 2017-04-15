@@ -15,7 +15,6 @@ defmodule Datjournaal.PostController do
 
   def create(conn, %{"post" => post_params}) do
     changeset = Post.changeset(%Post{}, post_params)
-
     case Repo.insert(changeset) do
       {:ok, _post} ->
         conn
