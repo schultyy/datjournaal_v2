@@ -5,8 +5,9 @@ defmodule Datjournaal.User do
     field :email, :string
     field :name, :string
     field :password_hash, :string
+    field :password, :string, virtual: true
     field :is_admin, :boolean, default: false
-
+    has_many :posts, Datjournaal.Post
     timestamps()
   end
 
