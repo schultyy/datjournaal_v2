@@ -18,5 +18,10 @@ defmodule Datjournaal.Post do
     |> cast(params, [:description])
     |> cast_attachments(params, [:image])
     |> validate_required([:image])
+    |> create_slug
+  end
+
+  defp create_slug(changeset) do
+    put_change(changeset, :slug, UUID.uuid4(:hex))
   end
 end

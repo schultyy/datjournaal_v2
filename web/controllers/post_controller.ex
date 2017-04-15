@@ -36,20 +36,6 @@ defmodule Datjournaal.PostController do
     render(conn, "edit.html", post: post, changeset: changeset)
   end
 
-  def update(conn, %{"id" => id, "post" => post_params}) do
-    post = Repo.get!(Post, id)
-    changeset = Post.changeset(post, post_params)
-
-    case Repo.update(changeset) do
-      {:ok, post} ->
-        conn
-        |> put_flash(:info, "Post updated successfully.")
-        |> redirect(to: post_path(conn, :show, post))
-      {:error, changeset} ->
-        render(conn, "edit.html", post: post, changeset: changeset)
-    end
-  end
-
   def delete(conn, %{"id" => id}) do
     post = Repo.get!(Post, id)
 

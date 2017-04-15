@@ -22,6 +22,12 @@ defmodule Datjournaal.PostControllerTest do
     assert Repo.get_by(Post, @valid_attrs)
   end
 
+  test "creates resource and calculates a slug", %{conn: conn} do
+    conn = post conn, post_path(conn, :create), post: @valid_attrs
+    post = Repo.get_by(Post, @valid_attrs)
+    assert post.slug != nil
+  end
+
   test "does not create resource and renders errors when data is invalid", %{conn: conn} do
     conn = post conn, post_path(conn, :create), post: @invalid_attrs
     assert html_response(conn, 200) =~ "New post"
@@ -37,25 +43,6 @@ defmodule Datjournaal.PostControllerTest do
     assert_error_sent 404, fn ->
       get conn, post_path(conn, :show, -1)
     end
-  end
-
-  test "renders form for editing chosen resource", %{conn: conn} do
-    post = Repo.insert! Post.changeset(%Post{}, @valid_attrs)
-    conn = get conn, post_path(conn, :edit, post)
-    assert html_response(conn, 200) =~ "Edit post"
-  end
-
-  test "updates chosen resource and redirects when data is valid", %{conn: conn} do
-    post = Repo.insert! Post.changeset(%Post{}, @valid_attrs)
-    conn = put conn, post_path(conn, :update, post), post: @valid_attrs
-    assert redirected_to(conn) == post_path(conn, :show, post)
-    assert Repo.get_by(Post, @valid_attrs)
-  end
-
-  test "does not update chosen resource and renders errors when data is invalid", %{conn: conn} do
-    post = Repo.insert! Post.changeset(%Post{}, @valid_attrs)
-    conn = put conn, post_path(conn, :update, post), post: @invalid_attrs
-    assert conn.status == 302
   end
 
   test "deletes chosen resource", %{conn: conn} do
