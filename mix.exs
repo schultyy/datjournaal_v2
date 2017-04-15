@@ -41,7 +41,8 @@ defmodule Datjournaal.Mixfile do
      {:arc, "~> 0.7.0"},
      {:arc_ecto, "~> 0.6.0"},
      {:uuid, "~> 1.1"},
-     {:comeonin, "~> 3.0"}]
+     {:comeonin, "~> 3.0"},
+     {:guardian, "~> 0.12.0"}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.

@@ -16,8 +16,8 @@ defmodule Datjournaal.User do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:email, :name, :password_hash, :is_admin])
-    |> validate_required([:email, :name, :password_hash, :is_admin])
+    |> cast(params, [:email, :name, :password, :is_admin])
+    |> validate_required([:email, :name, :password, :is_admin])
     |> validate_length(:password, min: 6)
     |> hash_password
   end
@@ -29,4 +29,5 @@ defmodule Datjournaal.User do
       _ ->
         changeset
     end
+  end
 end

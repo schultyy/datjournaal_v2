@@ -18,6 +18,7 @@ defmodule Datjournaal.Router do
 
     get "/", PostController, :index
     resources "/posts", PostController, only: [:create, :delete, :new]
+    resources "/sessions", SessionController, only: [:new, :create, :delete]
     get "/:slug", PostController, :show
   end
 
