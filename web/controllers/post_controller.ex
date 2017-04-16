@@ -3,6 +3,11 @@ defmodule Datjournaal.PostController do
 
   alias Datjournaal.Post
 
+  # def action(conn, _) do
+  #   apply(__MODULE__, action_name(conn),
+  #         [conn, conn.params, conn.assigns.current_user])
+  # end
+
   def index(conn, _params) do
     posts = Repo.all(Post)
     render(conn, "index.html", posts: posts)
@@ -14,7 +19,12 @@ defmodule Datjournaal.PostController do
   end
 
   def create(conn, %{"post" => post_params}) do
-    changeset = Post.changeset(%Post{}, post_params)
+    current_user = conn.assigns.current_user
+
+    changeset = current_user
+                |> build_assoc(:posts)
+                |> Post.changeset(post_params)
+
     case Repo.insert(changeset) do
       {:ok, _post} ->
         conn

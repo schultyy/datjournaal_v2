@@ -29,6 +29,15 @@ defmodule Datjournaal.ConnCase do
 
       # The default endpoint for testing
       @endpoint Datjournaal.Endpoint
+
+      def guardian_login(conn, user, token \\ :token, opts \\ []) do
+        conn
+        |> bypass_through(Datjournaal.Router, [:browser])
+        |> get("/")
+        |> Guardian.Plug.sign_in(user, token, opts)
+        |> send_resp(200, "Flush session")
+        |> recycle()
+      end
     end
   end
 

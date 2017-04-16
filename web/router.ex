@@ -15,6 +15,11 @@ defmodule Datjournaal.Router do
     plug Datjournaal.CurrentUser
   end
 
+  pipeline :login_required do
+    plug Guardian.Plug.EnsureAuthenticated,
+         handler: Datjournaal.GuardianErrorHandler
+  end
+
   pipeline :api do
     plug :accepts, ["json"]
   end
@@ -23,11 +28,14 @@ defmodule Datjournaal.Router do
     pipe_through [:browser, :with_session]
 
     get "/", PostController, :index
-    resources "/posts", PostController, only: [:create, :delete, :new]
     resources "/sessions", SessionController, only: [:new, :create, :delete]
     get "/:slug", PostController, :show
-  end
 
+    scope "/" do
+      pipe_through [:login_required]
+      resources "/posts", PostController, only: [:create, :delete, :new]
+    end
+  end
   # Other scopes may use custom stacks.
   # scope "/api", Datjournaal do
   #   pipe_through :api
