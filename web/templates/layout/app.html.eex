@@ -12,30 +12,28 @@
   </head>
 
   <body>
-    <div>
-      <header>
-        <nav role="navigation">
-          <ul>
-            <%= if @current_user do %>
-              <li><%= @current_user.email %></li>
-              <li>
-                <%= button "Sign out", to: session_path(@conn, :delete, @current_user), method: :delete %>
-              </li>
-            <% else %>
-              <li><%= link "Sign in", to: session_path(@conn, :new) %></li>
-            <% end %>
-          </ul>
-        </nav>
-      </header>
+    <header class="header">
+      <nav role="navigation">
+        <ul class="list-inline">
+          <%= if @current_user do %>
+            <li><%= @current_user.email %></li>
+            <li>
+              <%= button "Sign out", to: session_path(@conn, :delete, @current_user), method: :delete %>
+            </li>
+          <% else %>
+            <li><%= link "Sign in", to: session_path(@conn, :new) %></li>
+          <% end %>
+        </ul>
+      </nav>
+    </header>
 
-      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+    <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
+    <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
 
-      <main role="main">
-        <%= render @view_module, @view_template, assigns %>
-      </main>
+    <main role="main" class="main">
+      <%= render @view_module, @view_template, assigns %>
+    </main>
 
-    </div>
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>
 </html>

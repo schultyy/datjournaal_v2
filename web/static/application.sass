@@ -1,2 +1,38 @@
+@import "_colors"
+
 body
-  color: green
+  font-size: 12px
+
+.header
+  position: fixed
+  top: 0px
+  left: 0px
+  width: 100%
+  background-color: $header-background-color
+  color: $header-foreground-color
+  button
+    margin: 0px
+    border: none
+    background: transparent
+    color: $header-foreground-color
+    text-decoration: underline
+  a
+    background: transparent
+    color: $header-foreground-color
+    text-decoration: underline
+
+.alert
+  margin-top: 20px
+  border: 1px solid black
+
+.list-inline
+  list-style-type: none
+  padding-left: 0px
+  margin: 0px
+  margin-left: 5px
+  li
+    display: inline-block
+
+.main
+  display: block
+  margin-top: 20px
