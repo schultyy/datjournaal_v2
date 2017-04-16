@@ -19,7 +19,7 @@
 
       <td class="text-right">
         <%= link "Show", to: post_path(@conn, :show, post.slug), class: "btn btn-default btn-xs" %>
-        <%= link "Delete", to: post_path(@conn, :delete, post), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+        <%= button "Delete", to: post_path(@conn, :delete, post), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
       </td>
     </tr>
 <% end %>
