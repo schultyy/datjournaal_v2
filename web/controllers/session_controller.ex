@@ -35,10 +35,18 @@ defmodule Datjournaal.SessionController do
   end
 
   def delete(conn, _) do
+    conn
+    |> logout
+    |> put_flash(:info, "See you later!")
+    |> redirect(to: post_path(conn, :index))
   end
 
   defp login(conn, user) do
     conn
     |> Guardian.Plug.sign_in(user)
+  end
+
+  defp logout(conn) do
+    Guardian.Plug.sign_out(conn)
   end
 end

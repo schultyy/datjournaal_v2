@@ -9,12 +9,18 @@ defmodule Datjournaal.Router do
     plug :put_secure_browser_headers
   end
 
+  pipeline :with_session do
+    plug Guardian.Plug.VerifySession
+    plug Guardian.Plug.LoadResource
+    plug Datjournaal.CurrentUser
+  end
+
   pipeline :api do
     plug :accepts, ["json"]
   end
 
   scope "/", Datjournaal do
-    pipe_through :browser # Use the default browser stack
+    pipe_through [:browser, :with_session]
 
     get "/", PostController, :index
     resources "/posts", PostController, only: [:create, :delete, :new]
