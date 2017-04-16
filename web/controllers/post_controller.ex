@@ -3,11 +3,6 @@ defmodule Datjournaal.PostController do
 
   alias Datjournaal.Post
 
-  # def action(conn, _) do
-  #   apply(__MODULE__, action_name(conn),
-  #         [conn, conn.params, conn.assigns.current_user])
-  # end
-
   def index(conn, _params) do
     posts = Repo.all(Post)
     render(conn, "index.html", posts: posts)
@@ -47,14 +42,19 @@ defmodule Datjournaal.PostController do
   end
 
   def delete(conn, %{"id" => id}) do
+    current_user = conn.assigns.current_user
     post = Repo.get!(Post, id)
 
-    # Here we use delete! (with a bang) because we expect
-    # it to always work (and if it does not, it will raise).
-    Repo.delete!(post)
-
-    conn
-    |> put_flash(:info, "Post deleted successfully.")
-    |> redirect(to: post_path(conn, :index))
+    cond do
+      post.user_id == current_user.id ->
+        Repo.delete!(post)
+        conn
+        |> put_flash(:info, "Post deleted successfully.")
+        |> redirect(to: post_path(conn, :index))
+      true ->
+        conn
+        |> put_flash(:error, "You cannot delete posts which don't belong to you")
+        |> redirect(to: post_path(conn, :show, post.slug))
+    end
   end
 end
