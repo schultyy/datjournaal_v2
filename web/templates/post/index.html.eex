@@ -1,27 +1,7 @@
-<table class="table">
-  <thead>
-    <tr>
-      <th>Description</th>
-      <th>Image</th>
-      <th>Slug</th>
-
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
 <%= for post <- @posts do %>
-    <tr>
-      <td><%= post.description %></td>
-      <td><img src="<%= photo_url(post) %>" /></td>
-      <td><%= post.slug %></td>
-
-      <td class="text-right">
-        <%= link "Show", to: post_path(@conn, :show, post.slug)%>
-        <%= button "Delete", to: post_path(@conn, :delete, post), method: :delete, data: [confirm: "Are you sure?"] %>
-      </td>
-    </tr>
+  <div class="tile">
+    <%= link to: post_path(@conn, :show, post.slug) do %>
+      <img src="<%= photo_url(post) %>" />
+    <% end %>
+  </div>
 <% end %>
-  </tbody>
-</table>
-
-<%= link "New post", to: post_path(@conn, :new) %>
