@@ -14,7 +14,12 @@ defmodule Datjournaal.PostController do
   end
 
   def create(conn, %{"post" => post_params}) do
-    changeset = Post.changeset(%Post{}, post_params)
+    current_user = conn.assigns.current_user
+
+    changeset = current_user
+                |> build_assoc(:posts)
+                |> Post.changeset(post_params)
+
     case Repo.insert(changeset) do
       {:ok, _post} ->
         conn
@@ -37,14 +42,19 @@ defmodule Datjournaal.PostController do
   end
 
   def delete(conn, %{"id" => id}) do
+    current_user = conn.assigns.current_user
     post = Repo.get!(Post, id)
 
-    # Here we use delete! (with a bang) because we expect
-    # it to always work (and if it does not, it will raise).
-    Repo.delete!(post)
-
-    conn
-    |> put_flash(:info, "Post deleted successfully.")
-    |> redirect(to: post_path(conn, :index))
+    cond do
+      post.user_id == current_user.id ->
+        Repo.delete!(post)
+        conn
+        |> put_flash(:info, "Post deleted successfully.")
+        |> redirect(to: post_path(conn, :index))
+      true ->
+        conn
+        |> put_flash(:error, "You cannot delete posts which don't belong to you")
+        |> redirect(to: post_path(conn, :show, post.slug))
+    end
   end
 end

@@ -9,3 +9,15 @@
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
+
+alias Datjournaal.{Repo, User}
+
+[
+  %{
+    name: "schultyy",
+    email: "hello@unexpected-co.de",
+    password: "test1234"
+  }
+]
+|> Enum.map(&User.changeset(%User{}, &1))
+|> Enum.each(&Repo.insert!(&1))
