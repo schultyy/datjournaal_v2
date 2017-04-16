@@ -1,0 +1,34 @@
+{
+  "name": "dat-journaal",
+  "version": "1.0.0",
+  "description": "Dat Journaal",
+  "main": "index.js",
+  "private": true,
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "babel-brunch": "^6.1.1",
+    "brunch": "^2.10.9",
+    "clean-css-brunch": "^2.10.0",
+    "css-brunch": "^2.10.0",
+    "javascript-brunch": "^2.10.0",
+    "sass-brunch": "^2.10.4",
+    "uglify-js-brunch": "^2.10.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/schultyy/datjournaal_v2.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/schultyy/datjournaal_v2/issues"
+  },
+  "homepage": "https://github.com/schultyy/datjournaal_v2#readme"
+}
