@@ -4,8 +4,12 @@ defmodule Datjournaal.PostController do
   alias Datjournaal.Post
 
   def index(conn, _params) do
-    posts = Repo.all(Post) |> Repo.preload(:user)
-    render(conn, "index.html", posts: posts)
+    posts = Repo.all from p in Post,
+        order_by: [desc: p.inserted_at],
+        select: p,
+        limit: 50
+    posts_with_users = Repo.preload(posts, :user)
+    render(conn, "index.html", posts: posts_with_users)
   end
 
   def new(conn, _params) do
