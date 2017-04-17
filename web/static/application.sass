@@ -1,7 +1,7 @@
 @import "_colors"
 
 $breakpoint: 768px
-$header-fontsize: 26px
+$header-fontsize: 20px
 
 *
   box-sizing: border-box
@@ -21,13 +21,6 @@ body
   li
     margin-top: 10px
     margin-bottom: 10px
-  button
-    margin: 0px
-    border: none
-    background: transparent
-    color: $header-foreground-color
-    text-decoration: underline
-    font-size: $header-fontsize
   a
     background: transparent
     color: $header-foreground-color
@@ -87,12 +80,25 @@ body
       background-color: $footer-button-color
       border-radius: 50%
       width: 40px
+      height: 40px
+      button
+        margin: 0px
+        border: none
+        background: transparent
+        color: $footer-foreground-color
+        text-decoration: none
+        font-size: 18px
+        padding: 5px
+        cursor: pointer
       a
         font-size: 26px
         color: $footer-foreground-color
         text-decoration: none
+        padding: 5px
 
 @media(min-width: $breakpoint)
+  .header
+    font-size: $header-fontsize + 5px
   .main
     .tiles
       display: flex
