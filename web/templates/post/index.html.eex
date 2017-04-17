@@ -1,6 +1,11 @@
 <div class="tiles">
   <%= for post <- @posts do %>
     <div class="tile">
+      <div class="meta">
+        <div class="author">
+          <%= post.user.name %>
+        </div>
+      </div>
       <%= link to: post_path(@conn, :show, post.slug) do %>
         <img src="<%= photo_url(post) %>" />
       <% end %>
