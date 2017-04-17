@@ -26,9 +26,17 @@
         </ul>
       </nav>
     </header>
+    <%
+      info = get_flash(@conn, :info)
+      error = get_flash(@conn, :error)
+    %>
 
-    <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-    <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+    <%= if info do %>
+      <p class="alert alert-info" role="alert"><%= info %></p>
+    <% end %>
+    <%= if error do %>
+      <p class="alert alert-danger" role="alert"><%= error %></p>
+    <% end %>
 
     <main role="main" class="main">
       <%= render @view_module, @view_template, assigns %>
