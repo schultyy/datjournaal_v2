@@ -4,7 +4,7 @@ defmodule Datjournaal.PostController do
   alias Datjournaal.Post
 
   def index(conn, _params) do
-    posts = Repo.all(Post)
+    posts = Repo.all(Post) |> Repo.preload(:user)
     render(conn, "index.html", posts: posts)
   end
 
@@ -31,7 +31,7 @@ defmodule Datjournaal.PostController do
   end
 
   def show(conn, %{"slug" => slug}) do
-    post = Repo.get_by!(Post, slug: slug)
+    post = Repo.get_by!(Post, slug: slug) |> Repo.preload(:user)
     render(conn, "show.html", post: post)
   end
 

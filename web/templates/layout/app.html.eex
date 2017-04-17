@@ -5,38 +5,52 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="author" content="Jan Schulte">
 
-    <title>Hello Datjournaal!</title>
+    <title>Dat Journaal</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
   </head>
 
   <body>
-    <div class="container">
-      <header class="header">
-        <nav role="navigation">
-          <ul class="nav nav-pills pull-right">
-            <%= if @current_user do %>
-              <li><%= @current_user.email %></li>
-              <li>
-                <%= button "Sign out", to: session_path(@conn, :delete, @current_user), method: :delete %>
-              </li>
-            <% else %>
-              <li><%= link "Sign in", to: session_path(@conn, :new) %></li>
-            <% end %>
-          </ul>
-        </nav>
-        <span class="logo"></span>
-      </header>
+    <header class="header">
+      <nav role="navigation">
+        <ul class="list-inline">
+          <li><%= link "Dat Journaal", to: post_path(@conn, :index) %></li>
+          <%= if @current_user do %>
+            <li><%= @current_user.email %></li>
+          <% else %>
+            <li><%= link "Sign in", to: session_path(@conn, :new) %></li>
+          <% end %>
+        </ul>
+      </nav>
+    </header>
+    <%
+      info = get_flash(@conn, :info)
+      error = get_flash(@conn, :error)
+    %>
 
-      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+    <%= if info do %>
+      <p class="alert alert-info" role="alert"><%= info %></p>
+    <% end %>
+    <%= if error do %>
+      <p class="alert alert-danger" role="alert"><%= error %></p>
+    <% end %>
 
-      <main role="main">
-        <%= render @view_module, @view_template, assigns %>
-      </main>
+    <main role="main" class="main">
+      <%= render @view_module, @view_template, assigns %>
+    </main>
 
-    </div> <!-- /container -->
+    <%= if @current_user do %>
+      <footer class="footer">
+        <ul class="list-inline menu">
+          <li><%= link "+", to: post_path(@conn, :new) %></li>
+          <%= if @current_user do %>
+            <li><%= button "🏃", to: session_path(@conn, :delete, @current_user), method: :delete %></li>
+          <% end %>
+        </ul>
+      </footer>
+    <% end %>
+
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>
 </html>

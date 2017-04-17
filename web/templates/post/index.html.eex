@@ -1,29 +1,5 @@
-<h2>Listing posts</h2>
-
-<table class="table">
-  <thead>
-    <tr>
-      <th>Description</th>
-      <th>Image</th>
-      <th>Slug</th>
-
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-<%= for post <- @posts do %>
-    <tr>
-      <td><%= post.description %></td>
-      <td><img src="<%= photo_url(post) %>" /></td>
-      <td><%= post.slug %></td>
-
-      <td class="text-right">
-        <%= link "Show", to: post_path(@conn, :show, post.slug), class: "btn btn-default btn-xs" %>
-        <%= button "Delete", to: post_path(@conn, :delete, post), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
-      </td>
-    </tr>
-<% end %>
-  </tbody>
-</table>
-
-<%= link "New post", to: post_path(@conn, :new) %>
+<div class="tiles">
+  <%= for post <- @posts do %>
+    <%= render "_post.html", post: post, conn: @conn, render_description: false %>
+  <% end %>
+</div>
