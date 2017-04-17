@@ -41,3 +41,8 @@ config :datjournaal, Datjournaal.Repo,
   hostname: System.get_env("PG_HOST"),
   database: "datjournaal_dev",
   pool_size: 10
+
+config :extwitter, :oauth, [
+   consumer_key: "",
+   consumer_secret: ""
+]
