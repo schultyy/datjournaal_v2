@@ -9,7 +9,7 @@ defmodule Datjournaal.PostControllerTest do
 
   test "lists all entries on index", %{conn: conn} do
     conn = get conn, post_path(conn, :index)
-    assert html_response(conn, 200) =~ "Listing posts"
+    assert conn.status == 200
   end
 
   test "renders form for new resources", %{conn: conn} do
@@ -62,9 +62,13 @@ defmodule Datjournaal.PostControllerTest do
   end
 
   test "shows chosen resource", %{conn: conn} do
-    post = Repo.insert! Post.changeset(%Post{}, @valid_attrs)
+    user = insert(:user)
+    changeset = user
+            |> build_assoc(:posts)
+            |> Post.changeset(@valid_attrs)
+    post = Repo.insert! changeset
     conn = get conn, post_path(conn, :show, post.slug)
-    assert html_response(conn, 200) =~ "Show post"
+    assert conn.status == 200
   end
 
   test "renders page not found when id is nonexistent", %{conn: conn} do
