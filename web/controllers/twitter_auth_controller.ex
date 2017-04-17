@@ -23,12 +23,12 @@ defmodule Datjournaal.TwitterAuthController do
     )
 
     user_info = ExTwitter.verify_credentials()
-    user_obj = %{ name: user_info.name, screen_name: user_info.screen_name }
-
-    conn = conn
-      |> put_session(:current_user, user_obj)
-      |> put_session(:access_token, access_token.oauth_token)
-      |> put_session(:access_token_secret, access_token.oauth_token_secret)
+    create_key_or_update(conn, %{
+      name: user_info.name,
+      screen_name: user_info.screen_name,
+      access_token: access_token.oauth_token,
+      access_token_secret: access_token.oauth_token_secret
+    })
 
     redirect conn, to: Router.Helpers.post_path(conn, :index)
   end
@@ -45,4 +45,17 @@ defmodule Datjournaal.TwitterAuthController do
     |> redirect(to: Router.Helpers.post_path(conn, :index))
   end
 
+  defp create_key_or_update(conn, params) do
+    current_user = conn.assigns.current_user
+    user_with_key = Repo.one(from u in Datjournaal.User, where: u.id == ^current_user.id) |> Repo.preload(:twitterkey)
+    changeset = case user_with_key.twitterkey do
+      nil ->
+        conn.assigns.current_user
+        |> build_assoc(:twitterkey)
+        |> Datjournaal.TwitterKey.changeset(params)
+      _ ->
+        Datjournaal.TwitterKey.changeset(user_with_key.twitterkey, params)
+    end
+    { :ok, _t } = Repo.insert_or_update(changeset)
+  end
 end
