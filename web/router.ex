@@ -34,6 +34,9 @@ defmodule Datjournaal.Router do
       pipe_through [:login_required]
       resources "/posts", PostController, only: [:create, :delete, :new]
       get "/settings", UserSettingsController, :index
+      get "/auth/request", TwitterAuthController, :request
+      get "/auth/callback", TwitterAuthController, :callback
+      get "/auth/logout", TwitterAuthController, :logout
     end
 
     get "/:slug", PostController, :show #This has to be the last route in the file because it acts as a catch-all

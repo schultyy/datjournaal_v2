@@ -43,7 +43,8 @@ defmodule Datjournaal.Mixfile do
      {:uuid, "~> 1.1"},
      {:comeonin, "~> 3.0"},
      {:guardian, "~> 0.12.0"},
-     {:ex_machina, "~> 2.0"}]
+     {:ex_machina, "~> 2.0"},
+     {:extwitter, "~> 0.8.3"}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.
