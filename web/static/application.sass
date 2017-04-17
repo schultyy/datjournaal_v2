@@ -39,6 +39,23 @@ body
   li
     display: inline-block
 
+.meta
+  position: absolute
+  margin-top: 5px
+  .author
+    top: 20px
+    z-index: 5
+    background-color: $tile-control-background-color
+    color: $tile-control-foreground-color
+    padding: 5px
+    font-size: 14px
+    margin-left: 5px
+    margin-right: 5px
+    border-radius: 2px
+    max-width: 200px
+    display: inline-block
+    height: 31px
+
 .main
   display: block
   margin-top: 50px
@@ -51,22 +68,6 @@ body
       max-width: 350px
       max-height: 350px
       position: relative
-      .meta
-        position: absolute
-        margin-top: 5px
-        .author
-          top: 20px
-          z-index: 5
-          background-color: $tile-control-background-color
-          color: $tile-control-foreground-color
-          padding: 5px
-          font-size: 14px
-          margin-left: 5px
-          margin-right: 5px
-          border-radius: 2px
-          max-width: 200px
-          display: inline-block
-          height: 31px
       img
         width: 100%
   .post-detail

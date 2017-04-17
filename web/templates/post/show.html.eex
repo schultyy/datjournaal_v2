@@ -1,5 +1,5 @@
 <div class="post-detail">
-  <img src="<%= photo_url(@post) %>" />
+  <%= render "_post.html", post: @post, conn: @conn %>
   <div class="description">
     <%= @post.description %>
   </div>
