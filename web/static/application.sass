@@ -1,5 +1,10 @@
 @import "_colors"
 
+$breakpoint: 768px
+
+*
+  box-sizing: border-box
+
 body
   font-size: 12px
 
@@ -36,13 +41,16 @@ body
 .main
   display: block
   margin-top: 20px
-
-  .tile
-    display: block
-    max-width: 350px
-    max-height: 350px
-    img
-      width: 100%
+  .tiles
+    display: flex
+    flex-direction: column
+    justify-content: center
+    .tile
+      display: inline-block
+      max-width: 350px
+      max-height: 350px
+      img
+        width: 100%
   .post-detail
     display: flex
     flex-direction: column
@@ -75,3 +83,12 @@ body
         font-size: 26px
         color: $footer-foreground-color
         text-decoration: none
+
+@media(min-width: $breakpoint)
+  .main
+    .tiles
+      display: flex
+      flex-direction: row
+      flex-wrap: wrap
+    .tile
+      margin: 5px

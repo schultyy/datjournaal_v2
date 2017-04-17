@@ -1,7 +1,9 @@
-<%= for post <- @posts do %>
-  <div class="tile">
-    <%= link to: post_path(@conn, :show, post.slug) do %>
-      <img src="<%= photo_url(post) %>" />
-    <% end %>
-  </div>
-<% end %>
+<div class="tiles">
+  <%= for post <- @posts do %>
+    <div class="tile">
+      <%= link to: post_path(@conn, :show, post.slug) do %>
+        <img src="<%= photo_url(post) %>" />
+      <% end %>
+    </div>
+  <% end %>
+</div>
