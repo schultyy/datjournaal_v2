@@ -29,12 +29,14 @@ defmodule Datjournaal.Router do
 
     get "/", PostController, :index
     resources "/sessions", SessionController, only: [:new, :create, :delete]
-    get "/:slug", PostController, :show
 
     scope "/" do
       pipe_through [:login_required]
       resources "/posts", PostController, only: [:create, :delete, :new]
+      get "/settings", UserSettingsController, :index
     end
+
+    get "/:slug", PostController, :show #This has to be the last route in the file because it acts as a catch-all
   end
   # Other scopes may use custom stacks.
   # scope "/api", Datjournaal do
