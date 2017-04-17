@@ -1,4 +1,9 @@
 <div class="user-settings">
   <h3>Manage your Twitter account</h3>
-  <%= link "Login with Twitter", to: twitter_auth_path(@conn, :request) %>
+  <%= if @user.twitterkey do %>
+    <div>Configured account name</div>
+    <div><%= @user.twitterkey.name %> - <%= @user.twitterkey.screen_name %></div>
+  <% else %>
+    <%= link "Login with Twitter", to: twitter_auth_path(@conn, :request) %>
+  <% end %>
 </div>

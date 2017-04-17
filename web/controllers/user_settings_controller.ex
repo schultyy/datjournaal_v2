@@ -2,6 +2,7 @@ defmodule Datjournaal.UserSettingsController do
   use Datjournaal.Web, :controller
 
   def index(conn, _params) do
-    render(conn, "index.html")
+    current_user = Repo.preload(conn.assigns.current_user, :twitterkey)
+    render(conn, "index.html", user: current_user)
   end
 end
