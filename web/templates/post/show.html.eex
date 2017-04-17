@@ -1,8 +1,5 @@
 <div class="post-detail">
-  <%= render "_post.html", post: @post, conn: @conn %>
-  <div class="description">
-    <%= @post.description %>
-  </div>
+  <%= render "_post.html", post: @post, conn: @conn, render_description: true %>
 </div>
 
 <%= link "Back", to: post_path(@conn, :index) %>

@@ -7,4 +7,9 @@
   <%= link to: post_path(@conn, :show, @post.slug) do %>
     <img src="<%= photo_url(@post) %>" />
   <% end %>
+  <%= if @render_description do %>
+    <div class="description">
+      <%= @post.description %>
+    </div>
+  <% end %>
 </div>

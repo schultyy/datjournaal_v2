@@ -1,5 +1,5 @@
 <div class="tiles">
   <%= for post <- @posts do %>
-    <%= render "_post.html", post: post, conn: @conn %>
+    <%= render "_post.html", post: post, conn: @conn, render_description: false %>
   <% end %>
 </div>
