@@ -43,11 +43,13 @@
       <%= render @view_module, @view_template, assigns %>
     </main>
 
-    <footer class="footer">
-      <ul class="list-inline menu">
-        <li><%= link "+", to: post_path(@conn, :new) %></li>
-      </ul>
-    </footer>
+    <%= if @current_user do %>
+      <footer class="footer">
+        <ul class="list-inline menu">
+          <li><%= link "+", to: post_path(@conn, :new) %></li>
+        </ul>
+      </footer>
+    <% end %>
 
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>
