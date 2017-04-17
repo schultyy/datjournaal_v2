@@ -1,5 +1,4 @@
 <div class="user-settings">
   <h3>Manage your Twitter account</h3>
-  <a href="#">"Login with Twitter"</a>
   <%= link "Login with Twitter", to: twitter_auth_path(@conn, :request) %>
 </div>
