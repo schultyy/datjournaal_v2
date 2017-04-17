@@ -1,22 +1,8 @@
-<h2>Show post</h2>
-
-<ul>
-
-  <li>
-    <strong>Description:</strong>
+<div class="post-detail">
+  <img src="<%= photo_url(@post) %>" />
+  <div class="description">
     <%= @post.description %>
-  </li>
-
-  <li>
-    <strong>Image:</strong>
-    <img src="<%= photo_url(@post) %>" />
-  </li>
-
-  <li>
-    <strong>Slug:</strong>
-    <%= @post.slug %>
-  </li>
-
-</ul>
+  </div>
+</div>
 
 <%= link "Back", to: post_path(@conn, :index) %>
