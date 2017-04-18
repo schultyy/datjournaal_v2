@@ -22,4 +22,9 @@ defmodule Datjournaal.UserSettingsControllerTest do
     assert html_response(response, 200) =~ user.twitterkey.name
     assert html_response(response, 200) =~ user.twitterkey.screen_name
   end
+
+  test "does not render page if user's not authenticated", %{conn: conn, user: _user} do
+    response = get conn, user_settings_path(conn, :index)
+    assert response.status == 302
+  end
 end
