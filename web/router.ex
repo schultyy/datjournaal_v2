@@ -33,7 +33,7 @@ defmodule Datjournaal.Router do
     scope "/" do
       pipe_through [:login_required]
       resources "/posts", PostController, only: [:create, :delete, :new]
-      get "/settings", UserSettingsController, :index
+      resources "/settings", UserSettingsController, only: [:index, :delete]
       get "/auth/request", TwitterAuthController, :request
       get "/auth/callback", TwitterAuthController, :callback
       get "/auth/logout", TwitterAuthController, :logout
