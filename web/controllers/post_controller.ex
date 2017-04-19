@@ -15,8 +15,9 @@ defmodule Datjournaal.PostController do
   end
 
   def new(conn, _params) do
+    current_user = conn.assigns.current_user
     changeset = Post.changeset(%Post{})
-    render(conn, "new.html", changeset: changeset)
+    render(conn, "new.html", %{changeset: changeset, current_user: Repo.preload(current_user, :twitterkey)})
   end
 
   def create(conn, %{"post" => post_params}) do
