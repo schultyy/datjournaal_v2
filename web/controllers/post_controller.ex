@@ -3,6 +3,8 @@ defmodule Datjournaal.PostController do
 
   alias Datjournaal.Post
 
+  plug :scrub_params, "post" when action in [:create]
+
   def index(conn, _params) do
     posts = Repo.all from p in Post,
         order_by: [desc: p.inserted_at],
