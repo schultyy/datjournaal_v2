@@ -3,6 +3,9 @@
 $breakpoint: 768px
 $header-fontsize: 20px
 
+$description-font: 'Raleway', sans-serif
+$description-font-size: 16px
+
 *
   box-sizing: border-box
 
@@ -42,6 +45,7 @@ body
 .meta
   position: absolute
   margin-top: 5px
+  font-family: $description-font
   .author
     top: 20px
     z-index: 5
@@ -83,6 +87,8 @@ body
       height: auto
     .description
       margin-top: 10px
+      font-size: $description-font-size
+      font-family: $description-font
   .new-post
     .form-group
       margin: 15px

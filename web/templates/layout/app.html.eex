@@ -8,6 +8,7 @@
     <meta name="author" content="Jan Schulte">
 
     <title>Dat Journaal</title>
+    <link href="https://fonts.googleapis.com/css?family=Raleway:300" rel="stylesheet">
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
   </head>
 
