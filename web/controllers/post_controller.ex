@@ -27,8 +27,12 @@ defmodule Datjournaal.PostController do
                 |> build_assoc(:posts)
                 |> Post.changeset(post_params)
 
+    create_tweet = Map.get(post_params, "post_on_twitter")
+
     case Repo.insert(changeset) do
-      {:ok, _post} ->
+      {:ok, post} ->
+        post_with_user = Repo.preload(post, user: :twitterkey)
+        post_to_twitter(create_tweet, post_with_user)
         conn
         |> put_flash(:info, "Post created successfully.")
         |> redirect(to: post_path(conn, :index))
@@ -63,5 +67,31 @@ defmodule Datjournaal.PostController do
         |> put_flash(:error, "You cannot delete posts which don't belong to you")
         |> redirect(to: post_path(conn, :show, post.slug))
     end
+  end
+
+  defp post_to_twitter("true", post_with_user) do
+    key = post_with_user.user.twitterkey
+    case key do
+      nil -> {}
+      _   ->
+        ExTwitter.configure(
+          :process,
+          Enum.concat(
+            ExTwitter.Config.get_tuples,
+            [ access_token: key.access_token,
+              access_token_secret: key.access_token_secret ]
+          )
+        )
+        Datjournaal.Tweet.to_url(post_with_user)
+            # This has to stay disabled until we add location support for Dat Journaal
+            # |> Datjournaal.Tweet.to_tweet(post_with_user.description, post_with_user.long_location_name)
+            # So long we will go with just the tweet's description
+            |> Datjournaal.Tweet.to_tweet(post_with_user.description)
+            |> ExTwitter.update()
+    end
+  end
+
+  defp post_to_twitter(_post_on_twitter, _post_with_user) do
+    {}
   end
 end
