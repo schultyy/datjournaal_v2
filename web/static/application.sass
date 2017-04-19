@@ -66,19 +66,21 @@ body
     justify-content: center
     .tile
       display: inline-block
-      max-width: 350px
-      max-height: 350px
+      width: 300px
+      height: auto
       position: relative
+      margin-bottom: 10px
       img
         width: 100%
+        height: auto
   .post-detail
     display: flex
     flex-direction: column
-    justify-content: flex-start
+    align-items: center
     img
       display: block
       max-width: 300px
-      max-height: 300px
+      height: auto
     .description
       margin-top: 10px
   .new-post
@@ -134,17 +136,5 @@ body
   .main
     .tiles
       display: flex
-      flex-direction: row
-      flex-wrap: wrap
-    .tile
-      margin: 5px
-    .post-detail
-      .tile
-        display: flex
-        flex-direction: row
-        img
-          max-width: 400px
-          max-height: 400px
-      .description
-        margin-left: 10px
-        font-size: 16px
+      justify-content: center
+      align-items: center
