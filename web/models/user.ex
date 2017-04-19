@@ -8,6 +8,7 @@ defmodule Datjournaal.User do
     field :password, :string, virtual: true
     field :is_admin, :boolean, default: false
     has_many :posts, Datjournaal.Post
+    has_one :twitterkey, Datjournaal.TwitterKey
     timestamps()
   end
 

@@ -20,6 +20,13 @@
       <%= error_tag f, :description %>
     </div>
 
+    <%= if @current_user.twitterkey do %>
+      <div class="form-group">
+        <%= label f, "Post on Twitter" %>
+        <%= checkbox(f, :post_on_twitter) %>
+      </div>
+    <% end %>
+
     <div class="form-group">
       <%= submit "Submit" %>
     </div>
