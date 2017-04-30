@@ -1,5 +1,14 @@
 <div class="tiles">
   <%= for post <- @posts do %>
-    <%= render "_post.html", post: post, conn: @conn, render_description: false %>
+    <div class="tile">
+      <%= link to: post_path(@conn, :show, post.slug) do %>
+        <img src="<%= photo_url(post) %>" />
+        <div class="meta">
+          <div class="author">
+            <%= post.user.name %>
+          </div>
+        </div>
+      <% end %>
+    </div>
   <% end %>
 </div>
