@@ -1,3 +1,18 @@
 <div class="post-detail">
-  <%= render "_post.html", post: @post, conn: @conn, render_description: true %>
+  <div class="tile">
+    <%= link to: post_path(@conn, :show, @post.slug) do %>
+      <img src="<%= photo_url(@post) %>" />
+    <% end %>
+    <div class="meta-detail">
+      <div class="author">
+        <%= @post.user.name %>
+      </div>
+    </div>
+    <div class="description">
+      <%= @post.description %>
+    </div>
+    <div class="date">
+      <%= format_time(@post.inserted_at) %>
+    </div>
+  </div>
 </div>
