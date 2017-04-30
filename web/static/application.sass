@@ -51,10 +51,16 @@ body
 .meta
   position: absolute
   bottom: 5px
-  right: 5px
+  width: 300px
   font-family: $description-font
+  display: flex
+  flex-direction: row
+  justify-content: flex-end
+  .location
+    flex-order: 1
   .author
-    bottom: 20px
+    flex-order: 2
+  .meta-item
     z-index: 5
     color: $tile-control-foreground-color
     padding: 5px
@@ -62,6 +68,7 @@ body
     max-width: 200px
     display: inline-block
     height: 31px
+    margin: 0px 10px
 
 .meta-detail
   border-top: 1px dashed
