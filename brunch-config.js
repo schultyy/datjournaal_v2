@@ -65,6 +65,10 @@ exports.config = {
     },
     sass: {
       mode: 'native'
+    },
+    copycat: {
+      "fonts" : ["node_modules/font-awesome/fonts"],
+      onlyChanged: true
     }
   },
 
