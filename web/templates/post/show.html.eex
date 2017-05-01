@@ -1,11 +1,15 @@
 <div class="post-detail">
   <div class="tile">
-    <%= link to: post_path(@conn, :show, @post.slug) do %>
+    <div class="location">
+      <i class="fa fa-map-marker" aria-hidden="true"></i>
+      HTW Campus Wilhelminenhof-Schöneweide
+    </div>
+    <div class="image">
       <img src="<%= photo_url(@post) %>" />
-    <% end %>
-    <div class="meta-detail">
-      <div class="author">
-        <%= @post.user.name %>
+      <div class="meta-detail">
+        <div class="author">
+          <%= @post.user.name %>
+        </div>
       </div>
     </div>
     <div class="description">
