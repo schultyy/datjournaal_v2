@@ -56,19 +56,23 @@ body
   width: 300px
   font-family: $description-font
   display: flex
-  flex-direction: row
-  justify-content: flex-end
+  flex-direction:
+  justify-content: space-around
+  align-items: center
   .location
     flex-order: 1
-    font-size: 3.5vw
+    text-overflow: ellipsis
+    overflow: hidden
+    white-space: nowrap
+    max-width: 200px
   .author
     flex-order: 2
-    font-size: 5vw
+    max-width: 100px
   .meta-item
     z-index: 1
+    font-size: 16px
     color: $tile-control-foreground-color
     padding: 5px
-    max-width: 200px
     display: inline-block
     height: 31px
     margin: 0px 10px
@@ -89,9 +93,8 @@ body
   .tiles
     display: flex
     flex-direction: column
-    justify-content: center
+    align-items: center
     .tile
-      display: inline-block
       width: 300px
       height: auto
       position: relative
