@@ -23,7 +23,10 @@
     <%= if @current_user.twitterkey do %>
       <div class="form-group">
         <%= checkbox(f, :post_on_twitter, class: "ios8-switch ios8-switch-lg", id: "post-on-twitter") %>
-        <%= label f, "Post on Twitter", for: "post-on-twitter" %>
+        <label for="post-on-twitter">
+          <i class="fa fa-twitter" aria-hidden="true"></i>
+          Tweet this
+        </label>
       </div>
     <% end %>
 
