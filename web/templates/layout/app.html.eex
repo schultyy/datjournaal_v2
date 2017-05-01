@@ -8,6 +8,7 @@
     <meta name="author" content="Jan Schulte">
 
     <title>Dat Journaal</title>
+    <link href="https://fonts.googleapis.com/css?family=Raleway:300|Roboto" rel="stylesheet">
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
   </head>
 
@@ -17,7 +18,7 @@
         <ul class="list-inline">
           <li><%= link "Dat Journaal", to: post_path(@conn, :index) %></li>
           <%= if @current_user do %>
-            <li><%= @current_user.email %></li>
+            <li><%= @current_user.name %></li>
           <% else %>
             <li><%= link "Sign in", to: session_path(@conn, :new) %></li>
           <% end %>

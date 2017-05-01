@@ -1,7 +1,14 @@
 @import "_colors"
+@import "_toggle"
+@import 'node_modules/font-awesome/scss/font-awesome'
+
 
 $breakpoint: 768px
 $header-fontsize: 20px
+
+$header-font: 'Roboto', sans-serif
+$description-font: 'Raleway', sans-serif
+$description-font-size: 16px
 
 *
   box-sizing: border-box
@@ -18,6 +25,10 @@ body
   background-color: $header-background-color
   color: $header-foreground-color
   font-size: $header-fontsize
+  font-family: $header-font
+  display: flex
+  flex-direction: row
+  justify-content: center
   li
     margin-top: 10px
     margin-bottom: 10px
@@ -41,20 +52,35 @@ body
 
 .meta
   position: absolute
-  margin-top: 5px
+  bottom: 5px
+  width: 300px
+  font-family: $description-font
+  display: flex
+  flex-direction: row
+  justify-content: flex-end
+  .location
+    flex-order: 1
+    font-size: 3.5vw
   .author
-    top: 20px
-    z-index: 5
-    background-color: $tile-control-background-color
+    flex-order: 2
+    font-size: 5vw
+  .meta-item
+    z-index: 1
     color: $tile-control-foreground-color
     padding: 5px
-    font-size: 14px
-    margin-left: 5px
-    margin-right: 5px
-    border-radius: 2px
     max-width: 200px
     display: inline-block
     height: 31px
+    margin: 0px 10px
+
+.meta-detail
+  border-top: 1px dashed
+  border-bottom: 1px dashed
+  max-width: 300px
+  margin-top: 5px
+  .author
+    font-size: 16px
+    display: inline
 
 .main
   display: block
@@ -66,22 +92,33 @@ body
     justify-content: center
     .tile
       display: inline-block
-      max-width: 350px
-      max-height: 350px
+      width: 300px
+      height: auto
       position: relative
+      margin-bottom: 10px
       img
         width: 100%
+        height: auto
+        opacity: 0.8
   .post-detail
     display: flex
     flex-direction: column
-    justify-content: flex-start
+    align-items: center
     img
       display: block
       max-width: 300px
-      max-height: 300px
+      height: auto
     .description
       margin-top: 10px
+      font-size: $description-font-size
+      font-family: $description-font
+    .date
+      margin-top: 5px
+  .new-post-headline
+    font-family: $description-font
   .new-post
+    font-family: $description-font
+    font-size: 16px
     .form-group
       margin: 15px
     textarea
@@ -92,7 +129,7 @@ body
       outline: none
       box-shadow: none
       border: 1px solid black
-      font-family: Arial, Helvetica, sans-serif
+      font-family: $description-font
       resize: none
 .footer
   position: fixed
@@ -100,6 +137,7 @@ body
   bottom: 5px
   left: 0px
   width: auto
+  z-index: 5
   .menu
     li
       margin: 0px 0px
@@ -134,17 +172,5 @@ body
   .main
     .tiles
       display: flex
-      flex-direction: row
-      flex-wrap: wrap
-    .tile
-      margin: 5px
-    .post-detail
-      .tile
-        display: flex
-        flex-direction: row
-        img
-          max-width: 400px
-          max-height: 400px
-      .description
-        margin-left: 10px
-        font-size: 16px
+      justify-content: center
+      align-items: center
