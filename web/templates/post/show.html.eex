@@ -1,5 +1,9 @@
 <div class="post-detail">
   <div class="tile">
+    <div class="location">
+      <i class="fa fa-map-marker" aria-hidden="true"></i>
+      HTW Campus Wilhelminenhof-Schöneweide
+    </div>
     <img src="<%= photo_url(@post) %>" />
     <div class="meta-detail">
       <div class="author">
