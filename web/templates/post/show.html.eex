@@ -4,10 +4,12 @@
       <i class="fa fa-map-marker" aria-hidden="true"></i>
       HTW Campus Wilhelminenhof-Schöneweide
     </div>
-    <img src="<%= photo_url(@post) %>" />
-    <div class="meta-detail">
-      <div class="author">
-        <%= @post.user.name %>
+    <div class="image">
+      <img src="<%= photo_url(@post) %>" />
+      <div class="meta-detail">
+        <div class="author">
+          <%= @post.user.name %>
+        </div>
       </div>
     </div>
     <div class="description">
