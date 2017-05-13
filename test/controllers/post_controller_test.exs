@@ -16,7 +16,7 @@ defmodule Datjournaal.PostControllerTest do
     conn = conn
            |> guardian_login(insert(:user))
     conn = get conn, post_path(conn, :new)
-    assert html_response(conn, 200) =~ "New post"
+    assert html_response(conn, 200) =~ "Create a new post"
   end
 
   test "does not render form for new resources when user is not logged in", %{conn: conn} do
@@ -58,7 +58,7 @@ defmodule Datjournaal.PostControllerTest do
     conn = conn
            |> guardian_login(insert(:user))
     conn = post conn, post_path(conn, :create), post: @invalid_attrs
-    assert html_response(conn, 200) =~ "New post"
+    assert html_response(conn, 200) =~ "Create a new post"
   end
 
   test "shows chosen resource", %{conn: conn} do
