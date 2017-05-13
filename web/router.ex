@@ -22,6 +22,8 @@ defmodule Datjournaal.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug :fetch_session
+    plug :fetch_flash
   end
 
   scope "/", Datjournaal do
@@ -42,7 +44,10 @@ defmodule Datjournaal.Router do
     get "/:slug", PostController, :show #This has to be the last route in the file because it acts as a catch-all
   end
   # Other scopes may use custom stacks.
-  # scope "/api", Datjournaal do
-  #   pipe_through :api
-  # end
+  scope "/api", Datjournaal do
+    pipe_through [:api, :with_session, :login_required]
+    scope "v1" do
+      get "/location", LocationController, :get_location_for_name
+    end
+  end
 end
