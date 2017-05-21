@@ -1,6 +1,6 @@
 defmodule Datjournaal.PostController do
   use Datjournaal.Web, :controller
-
+  import Ecto.Changeset
   alias Datjournaal.Post
 
   plug :scrub_params, "post" when action in [:create]
@@ -26,6 +26,7 @@ defmodule Datjournaal.PostController do
     changeset = current_user
                 |> build_assoc(:posts)
                 |> Post.changeset(post_params)
+                |> fetch_location
 
     create_tweet = Map.get(post_params, "post_on_twitter")
 
@@ -93,5 +94,23 @@ defmodule Datjournaal.PostController do
 
   defp post_to_twitter(_post_on_twitter, _post_with_user) do
     {}
+  end
+
+  defp fetch_location(changeset) do
+    places_id = changeset |> get_change(:places_id)
+
+    cond do
+      places_id != nil ->
+        case Datjournaal.GmapsApiClient.get_place_details(places_id) do
+          { lat, long, long_name, short_name } ->
+            changeset
+              |> put_change(:short_location_name, short_name)
+              |> put_change(:long_location_name, long_name)
+              |> put_change(:lat, lat)
+              |> put_change(:lng, long)
+          nil -> changeset |> add_error(:places_id, "Invalid Google Places ID")
+        end
+      true -> changeset
+    end
   end
 end
