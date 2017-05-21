@@ -29,6 +29,9 @@ $(document).ready(function() {
       $(searchBar).css({ display: 'block' });
     } else {
       $(searchBar).hide();
+      $('#post_places_id').val('');
+      $('.location-results').empty();
+      $('.location-search-bar').val('');
     }
   });
 });
@@ -42,6 +45,8 @@ function searchLocation(location) {
     var resultViews = results.map(function(location) {
       return new Location(location);
     });
+    var locationViewList = new LocationViewList(resultViews);
+
     var container = $('.location-results');
     resultViews.forEach(function(view) {
       view.render(container);
@@ -49,6 +54,19 @@ function searchLocation(location) {
   });
 }
 
+function LocationViewList(childViews) {
+  this.childViews = childViews;
+  var self = this;
+  this.childViews.forEach(function(childView) {
+    childView.deselectCallback = self.deselect.bind(self);
+  });
+}
+
+LocationViewList.prototype.deselect = function() {
+  this.childViews.forEach(function(childView) {
+    childView.deselect();
+  });
+};
 
 function Location(locationResult) {
   this.description = locationResult.description;
@@ -57,8 +75,22 @@ function Location(locationResult) {
 }
 
 Location.prototype.render = function(container) {
-  var item = $('<div>');
-  item.html(this.mainText);
-  item.addClass('search-result');
-  $(container).append(item);
+  this.domElement = $('<div>');
+  $(this.domElement).html(this.mainText);
+  $(this.domElement).addClass('search-result');
+  $(this.domElement).click(this.onClick.bind(this));
+  $(container).append(this.domElement);
+};
+
+Location.prototype.onClick = function(event) {
+  if (this.deselectCallback) {
+    this.deselectCallback();
+  }
+
+  $(this.domElement).addClass('selected');
+  $('#post_places_id').val(this.placesId);
+};
+
+Location.prototype.deselect = function() {
+  $(this.domElement).removeClass('selected');
 };

@@ -20,6 +20,10 @@
       <%= error_tag f, :description %>
     </div>
 
+    <div class="form-group hidden">
+      <%= text_input f, :places_id %>
+    </div>
+
     <%= if @current_user.twitterkey do %>
       <div class="form-group">
         <%= checkbox(f, :post_on_twitter, class: "ios8-switch ios8-switch-lg", id: "post-on-twitter") %>
