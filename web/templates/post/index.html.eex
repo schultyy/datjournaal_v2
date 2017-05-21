@@ -4,12 +4,12 @@
       <%= link to: post_path(@conn, :show, post.slug) do %>
         <img src="<%= photo_url(post) %>" />
         <div class="meta">
-          <%= if post.short_location_name do %>
-            <div class="meta-item location">
+          <div class="meta-item location">
+            <%= if post.short_location_name do %>
               <i class="fa fa-map-marker" aria-hidden="true"></i>
               <%= post.short_location_name %>
-            </div>
-          <% end %>
+            <% end %>
+          </div>
           <div class="meta-item author">
             <%= post.user.name %>
           </div>
