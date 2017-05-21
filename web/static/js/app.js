@@ -49,9 +49,14 @@ function searchLocation(location) {
     var locationViewList = new LocationViewList(resultViews);
 
     var container = $('.location-results');
-    resultViews.forEach(function(view) {
-      view.render(container);
-    });
+    $(container).empty();
+    if (resultViews.length === 0) {
+      $(container).append("<p>No search results</p>");
+    } else {
+      resultViews.forEach(function(view) {
+        view.render(container);
+      });
+    }
   });
 }
 
