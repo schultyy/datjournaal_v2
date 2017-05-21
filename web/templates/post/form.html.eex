@@ -31,6 +31,19 @@
     <% end %>
 
     <div class="form-group">
+      <input type="checkbox" name="has-location" class="ios8-switch ios8-switch-lg" id="has-location">
+      <label for="has-location">
+        <i class="fa fa-map-marker" aria-hidden="true"></i>
+        Add location
+      </label>
+
+      <input type="text" placeholder="Search for location" class="location-search-bar">
+
+      <div class="location-results">
+      </div>
+    </div>
+
+    <div class="form-group">
       <%= submit "Submit" %>
     </div>
   <% end %>
