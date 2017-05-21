@@ -77,7 +77,7 @@ function Location(locationResult) {
 
 Location.prototype.render = function(container) {
   this.domElement = $('<div>');
-  $(this.domElement).html(this.mainText);
+  $(this.domElement).html(this.mainText + "<br />" + this.description);
   $(this.domElement).addClass('search-result');
   $(this.domElement).click(this.onClick.bind(this));
   $(container).append(this.domElement);
