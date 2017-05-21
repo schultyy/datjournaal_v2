@@ -41,14 +41,17 @@
         Add location
       </label>
 
-      <input type="text" placeholder="Search for location" class="location-search-bar">
+      <div class="location-search-area">
+        <input type="text" placeholder="Search for location" class="location-search-bar">
+        <input type="button" value="Search" class="location-search-submit" />
+      </div>
 
       <div class="location-results">
       </div>
     </div>
 
     <div class="form-group">
-      <%= submit "Submit" %>
+      <%= submit "Create Post", class: "submit" %>
     </div>
   <% end %>
 </div>

@@ -4,17 +4,18 @@ var $ = require('jquery');
 
 $(document).ready(function() {
   var newPostContainer = $('.new-post');
-  var searchBar = $('.location-search-bar');
+  var searchArea = $('.location-search-area');
+  var searchButton = $('.location-search-submit');
 
   if (!newPostContainer) {
     return;
   }
 
-  $(searchBar).keydown(function(event) {
-    if (event.keyCode === 13) {
-      event.preventDefault();
-      searchLocation(event.target.value);
-    }
+
+
+  $(searchButton).click(function(event) {
+    event.preventDefault();
+    searchLocation($('.location-search-bar').val());
   });
 
   var locationSwitch = $('#has-location');
@@ -25,10 +26,10 @@ $(document).ready(function() {
   $(locationSwitch).change(function(event) {
     var isChecked = event.target.checked;
     if (isChecked) {
-      $(searchBar).show();
-      $(searchBar).css({ display: 'block' });
+      $(searchArea).show();
+      $(searchArea).css({ display: 'block' });
     } else {
-      $(searchBar).hide();
+      $(searchArea).hide();
       $('#post_places_id').val('');
       $('.location-results').empty();
       $('.location-search-bar').val('');
