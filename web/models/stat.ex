@@ -13,7 +13,26 @@ defmodule Datjournaal.Stat do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:unique_identifier])
-    |> validate_required([:unique_identifier])
+    |> cast(params, [:unique_identifier, :authenticated])
+    |> validate_required([:unique_identifier, :authenticated])
+    |> unique_ip_address
+  end
+
+  defp unique_ip_address(changeset) do
+    case changeset.valid? do
+      true -> hash_address(changeset)
+      false -> changeset
+    end
+  end
+
+  defp hash_address(changeset) do
+    address = changeset |> get_change(:unique_identifier)
+    cond do
+      address != nil ->
+        unique_id = :crypto.hash(:sha256, address)
+                    |> Base.encode16
+        changeset |> put_change(:unique_identifier, unique_id)
+      true -> changeset
+    end
   end
 end
