@@ -4,7 +4,7 @@ defmodule Datjournaal.Repo.Migrations.CreateStat do
   def change do
     create table(:stats) do
       add :unique_identifier, :string
-      add :authenticated, :bool
+      add :authenticated, :bool, default: false
       add :post_id, references(:posts, on_delete: :nothing)
 
       timestamps()

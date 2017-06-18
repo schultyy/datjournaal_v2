@@ -44,6 +44,7 @@ defmodule Datjournaal.PostController do
 
   def show(conn, %{"slug" => slug}) do
     post = Repo.get_by!(Post, slug: slug) |> Repo.preload(:user)
+    post |> log_visit(conn)
     render(conn, "show.html", post: post)
   end
 
@@ -111,6 +112,25 @@ defmodule Datjournaal.PostController do
           nil -> changeset |> add_error(:places_id, "Invalid Google Places ID")
         end
       true -> changeset
+    end
+  end
+
+  defp log_visit(post, conn) do
+    authenticated = conn.assigns.current_user != nil
+    stats = Datjournaal.Stat.changeset(%Datjournaal.Stat{}, %{
+      unique_identifier: retrieve_ip_address(conn),
+      authenticated: authenticated,
+      post_id: post.id
+    })
+    Repo.insert!(stats)
+  end
+
+  def retrieve_ip_address(conn) do
+    ip_address = Plug.Conn.get_req_header(conn, "x-forwarded-for")
+                  |> List.first
+    case ip_address do
+      nil -> "127.0.0.1"
+      _ -> ip_address
     end
   end
 end

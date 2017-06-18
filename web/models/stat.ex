@@ -13,7 +13,7 @@ defmodule Datjournaal.Stat do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:unique_identifier, :authenticated])
+    |> cast(params, [:unique_identifier, :authenticated, :post_id])
     |> validate_required([:unique_identifier, :authenticated])
     |> unique_ip_address
   end
