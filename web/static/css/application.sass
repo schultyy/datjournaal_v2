@@ -173,13 +173,13 @@ body
       padding: 5px
       border: none
       text-align: center
-      vertical-align: middle
+      // vertical-align: middle
       height: 100%
       width: 100%
       background-color: $footer-button-color
       border-radius: 50%
-      width: 45px
-      height: 45px
+      width: 35px
+      height: 35px
       button
         margin: 0px
         border: none
@@ -189,11 +189,17 @@ body
         font-size: 18px
         padding: 5px
         cursor: pointer
+        display: flex
+        flex-direction: column
+        justify-content: center
       a
-        font-size: 26px
+        font-size: 16px
         color: $footer-foreground-color
         text-decoration: none
         padding: 5px
+        display: flex
+        flex-direction: column
+        justify-content: center
 
 @media(min-width: $breakpoint)
   .header
