@@ -55,6 +55,11 @@
             <% end %>
           </li>
           <li>
+            <%= link to: user_stats_path(@conn, :index) do %>
+              <i class="fa fa-line-chart" aria-hidden="true"></i>
+            <% end %>
+          </li>
+          <li>
             <%= button to: session_path(@conn, :delete, @current_user), method: :delete do %>
               <i class="fa fa-sign-out" aria-hidden="true"></i>
             <% end %>
