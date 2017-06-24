@@ -5,10 +5,7 @@ defmodule Datjournaal.UserStatsController do
 
   def index(conn, _params) do
     current_user = conn.assigns.current_user
-    p = my_posts(current_user)
-    IO.inspect "MY POSTS"
-    IO.inspect p
-    render(conn, "index.html", my_posts: p)
+    render(conn, "index.html", my_posts: my_posts(current_user))
   end
 
   defp my_posts(user) do
