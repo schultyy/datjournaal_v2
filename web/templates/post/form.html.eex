@@ -20,6 +20,10 @@
       <%= error_tag f, :description %>
     </div>
 
+    <div class="form-group hidden">
+      <%= text_input f, :places_id %>
+    </div>
+
     <%= if @current_user.twitterkey do %>
       <div class="form-group">
         <%= checkbox(f, :post_on_twitter, class: "ios8-switch ios8-switch-lg", id: "post-on-twitter") %>
@@ -31,7 +35,23 @@
     <% end %>
 
     <div class="form-group">
-      <%= submit "Submit" %>
+      <input type="checkbox" name="has-location" class="ios8-switch ios8-switch-lg" id="has-location">
+      <label for="has-location">
+        <i class="fa fa-map-marker" aria-hidden="true"></i>
+        Add location
+      </label>
+
+      <div class="location-search-area">
+        <input type="text" placeholder="Search for location" class="location-search-bar">
+        <input type="button" value="Search" class="location-search-submit" />
+      </div>
+
+      <div class="location-results">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= submit "Create Post", class: "submit" %>
     </div>
   <% end %>
 </div>

@@ -15,7 +15,7 @@ web:
     - postgres
 
 test:
-  image: datjournaal_web
+  image: datjournaalv2_web
   command: mix test
   environment:
     - MIX_ENV=test

@@ -6,6 +6,11 @@ defmodule Datjournaal.Post do
     field :description, :string
     field :image, Datjournaal.Image.Type
     field :slug, :string
+    field :lat, :float
+    field :lng, :float
+    field :short_location_name, :string
+    field :long_location_name, :string
+    field :places_id, :string
     belongs_to :user, Datjournaal.User
     timestamps()
   end
@@ -15,7 +20,7 @@ defmodule Datjournaal.Post do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:description])
+    |> cast(params, [:description, :places_id])
     |> cast_attachments(params, [:image])
     |> validate_required([:image])
     |> create_slug

@@ -44,9 +44,26 @@
     <%= if @current_user do %>
       <footer class="footer">
         <ul class="list-inline menu">
-          <li><%= link "+", to: post_path(@conn, :new) %></li>
-          <li><%= link "🔧", to: user_settings_path(@conn, :index) %></li>
-          <li><%= button "🏃", to: session_path(@conn, :delete, @current_user), method: :delete %></li>
+          <li>
+            <%= link to: post_path(@conn, :new) do %>
+              <i class="fa fa-plus" aria-hidden="true"></i>
+            <% end %>
+          </li>
+          <li>
+            <%= link to: user_settings_path(@conn, :index) do %>
+              <i class="fa fa-sliders" aria-hidden="true"></i>
+            <% end %>
+          </li>
+          <li>
+            <%= link to: user_stats_path(@conn, :index) do %>
+              <i class="fa fa-line-chart" aria-hidden="true"></i>
+            <% end %>
+          </li>
+          <li>
+            <%= button to: session_path(@conn, :delete, @current_user), method: :delete do %>
+              <i class="fa fa-sign-out" aria-hidden="true"></i>
+            <% end %>
+          </li>
         </ul>
       </footer>
     <% end %>

@@ -1,6 +1,6 @@
 defmodule Datjournaal.PostController do
   use Datjournaal.Web, :controller
-
+  import Ecto.Changeset
   alias Datjournaal.Post
 
   plug :scrub_params, "post" when action in [:create]
@@ -26,6 +26,7 @@ defmodule Datjournaal.PostController do
     changeset = current_user
                 |> build_assoc(:posts)
                 |> Post.changeset(post_params)
+                |> fetch_location
 
     create_tweet = Map.get(post_params, "post_on_twitter")
 
@@ -37,12 +38,13 @@ defmodule Datjournaal.PostController do
         |> put_flash(:info, "Post created successfully.")
         |> redirect(to: post_path(conn, :index))
       {:error, changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        render(conn, "new.html", %{ changeset: changeset, current_user: Repo.preload(current_user, :twitterkey) })
     end
   end
 
   def show(conn, %{"slug" => slug}) do
     post = Repo.get_by!(Post, slug: slug) |> Repo.preload(:user)
+    post |> log_visit(conn)
     render(conn, "show.html", post: post)
   end
 
@@ -93,5 +95,42 @@ defmodule Datjournaal.PostController do
 
   defp post_to_twitter(_post_on_twitter, _post_with_user) do
     {}
+  end
+
+  defp fetch_location(changeset) do
+    places_id = changeset |> get_change(:places_id)
+
+    cond do
+      places_id != nil ->
+        case Datjournaal.GmapsApiClient.get_place_details(places_id) do
+          { lat, long, long_name, short_name } ->
+            changeset
+              |> put_change(:short_location_name, short_name)
+              |> put_change(:long_location_name, long_name)
+              |> put_change(:lat, lat)
+              |> put_change(:lng, long)
+          nil -> changeset |> add_error(:places_id, "Invalid Google Places ID")
+        end
+      true -> changeset
+    end
+  end
+
+  defp log_visit(post, conn) do
+    authenticated = conn.assigns.current_user != nil
+    stats = Datjournaal.Stat.changeset(%Datjournaal.Stat{}, %{
+      unique_identifier: retrieve_ip_address(conn),
+      authenticated: authenticated,
+      post_id: post.id
+    })
+    Repo.insert!(stats)
+  end
+
+  def retrieve_ip_address(conn) do
+    ip_address = Plug.Conn.get_req_header(conn, "x-forwarded-for")
+                  |> List.first
+    case ip_address do
+      nil -> "127.0.0.1"
+      _ -> ip_address
+    end
   end
 end

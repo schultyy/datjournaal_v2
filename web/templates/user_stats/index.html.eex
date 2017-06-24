@@ -1,0 +1,13 @@
+<div class="popular-posts">
+  <h1>My popular posts</h1>
+  <div class="posts">
+    <%= for { post, visit_count } <- @my_posts do %>
+      <div class="post">
+        <img src="<%= photo_url(post) %>" />
+        <div class="visits">
+          <%= visit_count %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -131,6 +131,18 @@ body
     font-size: 16px
     .form-group
       margin: 15px
+      &.hidden
+        display: none
+      .location-search-area
+        display: none
+        margin-top: 10px
+    .submit
+      background-color: #318589
+      color: white
+      border-radius: 1px
+      height: 35px
+      width: 150px
+      border: none
     textarea
       padding-left: 5px
       padding-right: 5px
@@ -141,6 +153,13 @@ body
       border: 1px solid black
       font-family: $description-font
       resize: none
+    .search-result
+      margin: 5px
+      font-size: 16px
+      border: 0.5px solid gray
+      border-radius: 2px
+    .selected
+      background-color: lightgrey
 .footer
   position: fixed
   display: block
@@ -154,13 +173,13 @@ body
       padding: 5px
       border: none
       text-align: center
-      vertical-align: middle
+      // vertical-align: middle
       height: 100%
       width: 100%
       background-color: $footer-button-color
       border-radius: 50%
-      width: 45px
-      height: 45px
+      width: 35px
+      height: 35px
       button
         margin: 0px
         border: none
@@ -170,11 +189,50 @@ body
         font-size: 18px
         padding: 5px
         cursor: pointer
+        display: flex
+        flex-direction: column
+        justify-content: center
       a
-        font-size: 26px
+        font-size: 16px
         color: $footer-foreground-color
         text-decoration: none
         padding: 5px
+        display: flex
+        flex-direction: column
+        justify-content: center
+
+.popular-posts
+  display: flex
+  flex-direction: column
+  justify-content: center
+  h1
+    display: block
+    text-align: center
+  .posts
+    display: flex
+    flex-direction: row
+    justify-content: center
+    flex-wrap: wrap
+  .post
+    position: relative
+    img
+      width: 100px
+      height: 100px
+      margin: 2px
+      opacity: 0.8
+    .visits
+      color: $footer-foreground-color
+      background-color: $stat-visits-background-color
+      text-align: center
+      z-index: 1
+      position: absolute
+      font-size: 16px
+      opacity: 0.8
+      right: 5px
+      bottom: 15px
+      padding: 5px
+      border-radius: 3px
+      width: 40px
 
 @media(min-width: $breakpoint)
   .header
