@@ -1,10 +1,12 @@
-<h1>Sign in</h1>
-<%= form_for @conn, session_path(@conn, :create), [as: :session], fn f -> %>
-  <div>
-    <%= text_input f, :email, placeholder: "Email" %>
-  </div>
-  <div>
-    <%= password_input f, :password, placeholder: "Password" %>
-  </div>
-  <%= submit "Sign in" %>
-<% end %>
+<div class="sign-in">
+  <h1>Sign in</h1>
+  <%= form_for @conn, session_path(@conn, :create), [as: :session], fn f -> %>
+    <div>
+      <%= text_input f, :email, placeholder: "Email" %>
+    </div>
+    <div>
+      <%= password_input f, :password, placeholder: "Password" %>
+    </div>
+    <%= submit "Sign in" %>
+  <% end %>
+</div>
