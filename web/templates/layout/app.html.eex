@@ -8,21 +8,14 @@
     <meta name="author" content="Jan Schulte">
 
     <title>Dat Journaal</title>
-    <link href="https://fonts.googleapis.com/css?family=Raleway:300|Roboto" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:300|Roboto|Dancing+Script:700" rel="stylesheet">
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
   </head>
 
   <body>
     <header class="header">
       <nav role="navigation">
-        <ul class="list-inline">
-          <li><%= link "Dat Journaal", to: post_path(@conn, :index) %></li>
-          <%= if @current_user do %>
-            <li><%= @current_user.name %></li>
-          <% else %>
-            <li><%= link "Sign in", to: session_path(@conn, :new) %></li>
-          <% end %>
-        </ul>
+        <%= link "Dat Journaal", to: post_path(@conn, :index), class: "logo" %>
       </nav>
     </header>
     <%
@@ -41,9 +34,9 @@
       <%= render @view_module, @view_template, assigns %>
     </main>
 
-    <%= if @current_user do %>
-      <footer class="footer">
-        <ul class="list-inline menu">
+    <footer class="footer">
+      <ul class="list-inline menu">
+        <%= if @current_user do %>
           <li>
             <%= link to: post_path(@conn, :new) do %>
               <i class="fa fa-plus" aria-hidden="true"></i>
@@ -64,10 +57,15 @@
               <i class="fa fa-sign-out" aria-hidden="true"></i>
             <% end %>
           </li>
-        </ul>
-      </footer>
-    <% end %>
-
+        <% else %>
+          <li>
+            <%= link to: session_path(@conn, :new) do %>
+              <i class="fa fa-sign-in" aria-hidden="true"></i>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </footer>
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>
 </html>
