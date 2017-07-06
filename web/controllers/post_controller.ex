@@ -54,9 +54,9 @@ defmodule Datjournaal.PostController do
     render(conn, "edit.html", post: post, changeset: changeset)
   end
 
-  def delete(conn, %{"id" => id}) do
+  def delete(conn, %{"id" => slug}) do
     current_user = conn.assigns.current_user
-    post = Repo.get!(Post, id)
+    post = Repo.get_by!(Post, slug: slug)
 
     cond do
       post.user_id == current_user.id ->

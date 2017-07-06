@@ -1,6 +1,7 @@
 "use strict";
 
 var $ = require('jquery');
+require("phoenix_html");
 
 $(document).ready(function() {
   var newPostContainer = $('.new-post');
@@ -36,7 +37,6 @@ $(document).ready(function() {
     }
   });
 });
-
 
 function searchLocation(location) {
   var options = { credentials: "same-origin" };
