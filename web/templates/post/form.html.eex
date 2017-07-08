@@ -8,6 +8,8 @@
     <% end %>
 
     <div class="form-group">
+      <div class="image-preview">
+      </div>
       <%= label f, :image %>
       <br />
       <%= file_input f, :image %>

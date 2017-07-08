@@ -12,7 +12,19 @@ $(document).ready(function() {
     return;
   }
 
-
+  $("input:file").change(function() {
+    var files = $(this).prop('files');
+    if (files && files.length > 0) {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        var img = $('<img>');
+        img.attr('src', e.target.result);
+        $('.image-preview').empty();
+        $('.image-preview').append(img);
+      };
+      reader.readAsDataURL(files[0]);
+    }
+  });
 
   $(searchButton).click(function(event) {
     event.preventDefault();
