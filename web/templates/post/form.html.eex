@@ -9,6 +9,7 @@
 
     <div class="form-group">
       <div class="image-preview">
+        <i class="fa fa-file-image-o" aria-hidden="true"></i>
       </div>
       <%= label f, :image %>
       <br />
