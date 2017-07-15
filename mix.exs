@@ -48,7 +48,8 @@ defmodule Datjournaal.Mixfile do
      {:timex, "~> 3.0"},
      {:exvcr, "~> 0.7", only: :test},
      {:httpotion, "~> 3.0.2"},
-     {:calendar, "~> 0.14.2"}]
+     {:calendar, "~> 0.14.2"},
+     {:exrm, "~> 1.0.8"}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.
