@@ -6,7 +6,7 @@ RUN apk update
 RUN apk add --no-cache elixir erlang-crypto erlang-dev erlang-ssl g++ gcc make git vim nodejs imagemagick \
             erlang-dev erlang-asn1 erlang-crypto erlang-inets erlang-mnesia erlang-public-key \
             erlang-runtime-tools erlang-ssl erlang-syntax-tools erlang-hipe erlang-eunit \
-            erlang-parsetools erlang-tools python inotify-tools libressl2.5-libssl
+            erlang-parsetools erlang-tools python inotify-tools libressl2.4-libssl
 RUN mix local.hex --force
 RUN mix local.rebar --force
 RUN adduser -D -u 4000 journaal
