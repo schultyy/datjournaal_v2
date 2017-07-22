@@ -14,10 +14,11 @@ use Mix.Config
 config :datjournaal, Datjournaal.Endpoint,
   http: [port: {:system, "PORT"}],
   url: [host: "example.com", port: 80],
+  uploads_dir: "/var/apps/external/www/uploads",
   cache_static_manifest: "priv/static/manifest.json"
 
 # Do not print debug messages in production
-config :logger, level: :info
+config :logger, :console, format: "[$level] $message\n", level: :info
 
 # ## SSL Support
 #
@@ -53,7 +54,7 @@ config :logger, level: :info
 # Alternatively, you can configure exactly which server to
 # start per endpoint:
 #
-#     config :datjournaal, Datjournaal.Endpoint, server: true
+config :datjournaal, Datjournaal.Endpoint, server: true
 #
 
 # Finally import the config/prod.secret.exs
