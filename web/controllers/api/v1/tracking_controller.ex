@@ -10,9 +10,10 @@ defmodule Datjournaal.TrackingController do
   end
 
   defp create_visit(post, conn) do
+    authenticated = conn.assigns.current_user != nil
     stats = Datjournaal.Stat.changeset(%Datjournaal.Stat{}, %{
       unique_identifier: retrieve_ip_address(conn),
-      authenticated: false,
+      authenticated: authenticated,
       post_id: post.id
     })
     Repo.insert!(stats)

@@ -48,8 +48,9 @@ defmodule Datjournaal.Router do
   scope "/api", Datjournaal do
     pipe_through [:api]
     scope "/" do
+      pipe_through [:with_session]
       scope "v1" do
-        pipe_through [:with_session, :login_required]
+        pipe_through [:login_required]
         get "/location", LocationController, :get_location_for_name
       end
       scope "v1" do
