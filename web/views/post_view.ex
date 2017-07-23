@@ -2,6 +2,10 @@ defmodule Datjournaal.PostView do
   use Datjournaal.Web, :view
   use Timex
 
+  def belongs_to_user?(post, user) do
+    user && post.user_id == user.id
+  end
+
   def photo_url(post) do
     foo = Datjournaal.Image.url({post.image, :images}, :original)
           |> Path.basename
