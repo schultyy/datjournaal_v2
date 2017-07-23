@@ -11,4 +11,13 @@ defmodule Datjournaal.Factory do
       password_hash: Bcrypt.hashpwsalt("test1234")
     }
   end
+
+  def post_factory do
+    %Datjournaal.Post {
+      description: "Dies, Das",
+      image: %Plug.Upload{ path: "test/fixtures/placeholder.jpg", filename: "placeholder.jpg" },
+      user: build(:user),
+      slug: "12345"
+    }
+  end
 end
