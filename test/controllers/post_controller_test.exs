@@ -91,7 +91,7 @@ defmodule Datjournaal.PostControllerTest do
     post = Repo.insert! changeset
     conn = conn
            |> guardian_login(user)
-    conn = delete conn, post_path(conn, :delete, post)
+    conn = delete conn, post_path(conn, :delete, post.slug)
     assert redirected_to(conn) == post_path(conn, :index)
     refute Repo.get(Post, post.id)
   end
@@ -102,7 +102,7 @@ defmodule Datjournaal.PostControllerTest do
             |> build_assoc(:posts)
             |> Post.changeset(@valid_attrs)
     post = Repo.insert! changeset
-    conn = delete conn, post_path(conn, :delete, post)
+    conn = delete conn, post_path(conn, :delete, post.slug)
     assert redirected_to(conn) == session_path(conn, :new)
     assert Repo.get(Post, post.id)
   end
@@ -116,7 +116,7 @@ defmodule Datjournaal.PostControllerTest do
                 |> build_assoc(:posts)
                 |> Post.changeset(@valid_attrs)
     post = Repo.insert!(changeset)
-    conn = delete conn, post_path(conn, :delete, post)
+    conn = delete conn, post_path(conn, :delete, post.slug)
     assert redirected_to(conn) == post_path(conn, :show, post.slug)
     assert Repo.get(Post, post.id)
   end
@@ -136,28 +136,5 @@ defmodule Datjournaal.PostControllerTest do
       assert post.short_location_name == "Elbphilharmonie Hamburg"
       assert post.long_location_name == "Platz der Deutschen Einheit 1, 20457 Hamburg, Germany"
     end
-  end
-
-  test "logs visit to post's detail page", %{conn: conn} do
-    user = insert(:user)
-    changeset = user
-            |> build_assoc(:posts)
-            |> Post.changeset(@valid_attrs)
-    post = Repo.insert! changeset
-    get conn, post_path(conn, :show, post.slug)
-    stat = Repo.one(from x in Datjournaal.Stat, order_by: [desc: x.id], limit: 1)
-    assert stat.post_id == post.id
-    assert stat.authenticated == false
-  end
-
-  test "logs visit to post's detail page and stores if the user was authenticated", %{conn: conn} do
-    user = insert(:user)
-    changeset = user
-            |> build_assoc(:posts)
-            |> Post.changeset(@valid_attrs)
-    post = Repo.insert! changeset
-    get conn |> guardian_login(user), post_path(conn, :show, post.slug)
-    stat = Repo.one(from x in Datjournaal.Stat, order_by: [desc: x.id], limit: 1)
-    assert stat.authenticated == true
   end
 end

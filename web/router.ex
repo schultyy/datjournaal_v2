@@ -46,9 +46,16 @@ defmodule Datjournaal.Router do
   end
   # Other scopes may use custom stacks.
   scope "/api", Datjournaal do
-    pipe_through [:api, :with_session, :login_required]
-    scope "v1" do
-      get "/location", LocationController, :get_location_for_name
+    pipe_through [:api]
+    scope "/" do
+      pipe_through [:with_session]
+      scope "v1" do
+        pipe_through [:login_required]
+        get "/location", LocationController, :get_location_for_name
+      end
+      scope "v1" do
+        post "/visit/:id", TrackingController, :log_visit
+      end
     end
   end
 end
