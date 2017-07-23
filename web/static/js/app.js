@@ -3,6 +3,29 @@
 var $ = require('jquery');
 require("phoenix_html");
 
+$.fn.exists = function () {
+    return this.length !== 0;
+};
+
+$(document).ready(function() {
+  var postDetail = $('.post-detail');
+
+  if(!postDetail.exists()) {
+    return;
+  }
+  try {
+    var slug = window.location.href.substring(window.location.href.lastIndexOf('/') + 1);
+    if(!slug) {
+      return;
+    }
+    var request = new Request('/api/v1/visit/' + slug, {method: 'POST', credentials: 'same-origin'});
+    fetch(request);
+  }
+  catch(err) {
+    console.error('could not log visit', err);
+  }
+});
+
 $(document).ready(function() {
   var newPostContainer = $('.new-post');
   var searchArea = $('.location-search-area');
