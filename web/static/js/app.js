@@ -8,6 +8,10 @@ $(document).ready(function() {
   var searchArea = $('.location-search-area');
   var searchButton = $('.location-search-submit');
 
+  $('.new-post .form-group .submit').click(function() {
+    $(this).addClass('disabled');
+  });
+
   if (!newPostContainer) {
     return;
   }
