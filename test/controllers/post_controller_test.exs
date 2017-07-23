@@ -91,7 +91,7 @@ defmodule Datjournaal.PostControllerTest do
     post = Repo.insert! changeset
     conn = conn
            |> guardian_login(user)
-    conn = delete conn, post_path(conn, :delete, post)
+    conn = delete conn, post_path(conn, :delete, post.slug)
     assert redirected_to(conn) == post_path(conn, :index)
     refute Repo.get(Post, post.id)
   end
@@ -102,7 +102,7 @@ defmodule Datjournaal.PostControllerTest do
             |> build_assoc(:posts)
             |> Post.changeset(@valid_attrs)
     post = Repo.insert! changeset
-    conn = delete conn, post_path(conn, :delete, post)
+    conn = delete conn, post_path(conn, :delete, post.slug)
     assert redirected_to(conn) == session_path(conn, :new)
     assert Repo.get(Post, post.id)
   end
@@ -116,7 +116,7 @@ defmodule Datjournaal.PostControllerTest do
                 |> build_assoc(:posts)
                 |> Post.changeset(@valid_attrs)
     post = Repo.insert!(changeset)
-    conn = delete conn, post_path(conn, :delete, post)
+    conn = delete conn, post_path(conn, :delete, post.slug)
     assert redirected_to(conn) == post_path(conn, :show, post.slug)
     assert Repo.get(Post, post.id)
   end
