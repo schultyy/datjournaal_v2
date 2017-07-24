@@ -7,7 +7,7 @@
       <% end %>
     </div>
     <div class="image">
-      <img src="<%= photo_url(@post) %>" />
+      <img src="<%= photo_url(@post, :original) %>" />
       <div class="meta-detail">
         <div class="author">
           <%= @post.user.name %>

@@ -2,7 +2,7 @@
   <%= for post <- @posts do %>
     <div class="tile">
       <%= link to: post_path(@conn, :show, post.slug) do %>
-        <img src="<%= photo_url(post) %>" />
+        <img src="<%= photo_url(post, :thumb) %>" />
         <div class="meta">
           <div class="meta-item location">
             <%= if post.short_location_name do %>

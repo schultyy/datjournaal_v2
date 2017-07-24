@@ -6,8 +6,8 @@ defmodule Datjournaal.PostView do
     user && post.user_id == user.id
   end
 
-  def photo_url(post) do
-    foo = Datjournaal.Image.url({post.image, :images}, :original)
+  def photo_url(post, version) do
+    foo = Datjournaal.Image.url({post.image, :images}, version)
           |> Path.basename
     "/uploads/" <> foo
   end
