@@ -14,8 +14,8 @@
 
   <body>
     <header class="header">
-      <%= link "Dat Journaal", to: post_path(@conn, :index), class: "logo" %>
       <nav role="navigation">
+        <%= link "Dat Journaal", to: post_path(@conn, :index), class: "logo" %>
         <%= link "About", to: static_pages_path(@conn, :about) %>
       </nav>
     </header>
