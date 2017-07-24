@@ -41,7 +41,7 @@ defmodule Datjournaal.Router do
       get "/auth/callback", TwitterAuthController, :callback
       get "/auth/logout", TwitterAuthController, :logout
     end
-
+    get "/about", StaticPagesController, :about
     get "/:slug", PostController, :show #This has to be the last route in the file because it acts as a catch-all
   end
   # Other scopes may use custom stacks.
