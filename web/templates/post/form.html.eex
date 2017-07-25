@@ -47,7 +47,7 @@
 
       <div class="location-search-area">
         <input type="text" placeholder="Search for location" class="location-search-bar">
-        <input type="button" value="Search" class="location-search-submit" />
+        <button class="flat-button location-search-submit">Search</button>
       </div>
 
       <div class="location-results">
@@ -55,7 +55,7 @@
     </div>
 
     <div class="form-group">
-      <%= submit "Create Post", class: "submit" %>
+      <%= submit "Create Post", class: "flat-button submit" %>
     </div>
   <% end %>
 </div>
