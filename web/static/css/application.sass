@@ -167,8 +167,8 @@ main
         margin-top: 10px
       .image-preview
         border: 1px solid black
-        width: 100%
-        height: 200px
+        width: auto
+        height: 300px
         display: flex
         justify-content: center
         align-items: center
@@ -177,9 +177,10 @@ main
           display: block
         img
           display: inline-block
-          width: inherit
+          max-width: 300px
           height: inherit
           image-orientation: from-image
+          padding: 5px
     .submit
       background-color: #318589
       color: white
