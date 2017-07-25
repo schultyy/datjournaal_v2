@@ -14,6 +14,14 @@ $description-font-size: 16px
   box-sizing: border-box
   font-family: medium-content-sans-serif-font,"Lucida Grande","Lucida Sans Unicode","Lucida Sans",Geneva,Arial,sans-serif
 
+.flat-button
+  background-color: #318589
+  color: white
+  border-radius: 1px
+  height: 35px
+  width: 150px
+  border: none
+
 body
   font-size: 12px
 
@@ -167,8 +175,8 @@ main
         margin-top: 10px
       .image-preview
         border: 1px solid black
-        width: 100%
-        height: 200px
+        width: auto
+        height: 300px
         display: flex
         justify-content: center
         align-items: center
@@ -177,16 +185,12 @@ main
           display: block
         img
           display: inline-block
-          width: inherit
+          max-width: 300px
           height: inherit
           image-orientation: from-image
+          padding: 5px
     .submit
-      background-color: #318589
-      color: white
-      border-radius: 1px
-      height: 35px
-      width: 150px
-      border: none
+      margin-top: 50px
       &.disabled
         background-color: grey
         pointer-events: none
@@ -200,6 +204,12 @@ main
       border: 1px solid black
       font-family: $description-font
       resize: none
+    .location-search-area
+      input[type="text"]
+        width: 100%
+        font-size: 16px
+      .location-search-submit
+        margin-top: 5px
     .search-result
       margin: 5px
       font-size: 16px
