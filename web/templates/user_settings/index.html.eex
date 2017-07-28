@@ -1,10 +1,32 @@
 <div class="user-settings">
-  <h1>Manage your Twitter account</h1>
-  <%= if @user.twitterkey do %>
-    <div>Configured account name</div>
-    <div><%= @user.twitterkey.name %> - <%= @user.twitterkey.screen_name %></div>
-    <%= button "Unlink Twitter account", to: user_settings_path(@conn, :delete, @user.twitterkey.id), method: :delete, class: "flat-button" %>
-  <% else %>
-    <%= link "Login with Twitter", to: twitter_auth_path(@conn, :request), class: "flat-button" %>
-  <% end %>
+  <div class="twitter-account">
+    <h1>Manage your Twitter account</h1>
+    <%= if @user.twitterkey do %>
+      <div>Configured account name</div>
+      <div><%= @user.twitterkey.name %> - <%= @user.twitterkey.screen_name %></div>
+      <%= button "Unlink Twitter account", to: user_settings_path(@conn, :delete, @user.twitterkey.id), method: :delete, class: "flat-button" %>
+    <% else %>
+      <%= link "Login with Twitter", to: twitter_auth_path(@conn, :request), class: "flat-button" %>
+    <% end %>
+  </div>
+  <div class="change-password">
+    <h1>Change your password</h1>
+    <%= form_for @changeset, user_settings_path(@conn, :change_password), fn f -> %>
+      <div class="form-group">
+        <%= label f, :current_password %>
+        <%= text_input f, :current_password %>
+      </div>
+      <div class="form-group">
+        <%= label f, :new_password %>
+        <%= text_input f, :new_password %>
+      </div>
+      <div class="form-group">
+        <%= label f, :new_password_confirmation %>
+        <%= text_input f, :new_password_confirmation %>
+      </div>
+      <div class="form-group">
+        <%= submit "Change password", class: "flat-button submit" %>
+      </div>
+    <% end %>
+  </div>
 </div>
