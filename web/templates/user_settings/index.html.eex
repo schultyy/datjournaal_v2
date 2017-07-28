@@ -1,10 +1,10 @@
 <div class="user-settings">
-  <h3>Manage your Twitter account</h3>
+  <h1>Manage your Twitter account</h1>
   <%= if @user.twitterkey do %>
     <div>Configured account name</div>
     <div><%= @user.twitterkey.name %> - <%= @user.twitterkey.screen_name %></div>
-    <%= button "Unlink Twitter account", to: user_settings_path(@conn, :delete, @user.twitterkey.id), method: :delete %>
+    <%= button "Unlink Twitter account", to: user_settings_path(@conn, :delete, @user.twitterkey.id), method: :delete, class: "flat-button" %>
   <% else %>
-    <%= link "Login with Twitter", to: twitter_auth_path(@conn, :request) %>
+    <%= link "Login with Twitter", to: twitter_auth_path(@conn, :request), class: "flat-button" %>
   <% end %>
 </div>
