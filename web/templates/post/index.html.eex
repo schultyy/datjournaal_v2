@@ -17,4 +17,5 @@
       <% end %>
     </div>
   <% end %>
+  <%= pagination_links @posts %>
 </div>

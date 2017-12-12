@@ -5,13 +5,19 @@ defmodule Datjournaal.PostController do
 
   plug :scrub_params, "post" when action in [:create]
 
-  def index(conn, _params) do
-    posts = Repo.all from p in Post,
-        order_by: [desc: p.inserted_at],
-        select: p,
-        limit: 50
-    posts_with_users = Repo.preload(posts, :user)
-    render(conn, "index.html", posts: posts_with_users)
+  def index(conn, params) do
+    posts =
+      Post
+      |> order_by(desc: :inserted_at)
+      |> preload(:user)
+      |> Repo.paginate(params)
+    render conn,
+          "index.html",
+          posts: posts,
+          page_number: posts.page_number,
+          page_size: posts.page_size,
+          total_pages: posts.total_pages,
+          total_entries: posts.total_entries
   end
 
   def new(conn, _params) do
