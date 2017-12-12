@@ -1,7 +1,6 @@
 defmodule Datjournaal.PostView do
   use Datjournaal.Web, :view
   use Timex
-  import Scrivener.HTML
 
   def belongs_to_user?(post, user) do
     user && post.user_id == user.id

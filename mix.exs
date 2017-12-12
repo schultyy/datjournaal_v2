@@ -21,7 +21,7 @@ defmodule Datjournaal.Mixfile do
      applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
                     :phoenix_ecto, :postgrex, :arc_ecto, :comeonin, :timex, :httpotion,
                     :ex_machina, :guardian, :extwitter, :arc, :calendar, :oauther,
-                    :scrivener_ecto, :scrivener_html]]
+                    :scrivener_ecto]]
   end
 
   # Specifies which paths to compile per environment.
@@ -53,8 +53,7 @@ defmodule Datjournaal.Mixfile do
      {:calendar, "~> 0.14.2"},
      {:exrm, "~> 1.0.8"},
      {:plug, "~> 1.3"},
-     {:scrivener_ecto, "~> 1.3"},
-     {:scrivener_html, "~> 1.7"}]
+     {:scrivener_ecto, "~> 1.3"}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.
