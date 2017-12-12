@@ -4,7 +4,7 @@ otp_release: '20.0'
 cache:
   directories:
     - deps
-before_script:
+before_install:
   - cp config/dev.exs.example config/dev.exs
   - cp config/test.exs.example config/test.exs
 script: mix test
