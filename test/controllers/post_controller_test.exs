@@ -35,7 +35,7 @@ defmodule Datjournaal.PostControllerTest do
            |> guardian_login(insert(:user))
     conn = post conn, post_path(conn, :create), post: @valid_attrs
     assert redirected_to(conn) == post_path(conn, :index)
-    assert Repo.get_by(Post, @valid_attrs)
+    assert Repo.one(from x in Post, order_by: [desc: x.id], limit: 1)
   end
 
   test "creates resource and redirects when data is valid and user is not logged in", %{conn: conn} do
@@ -47,7 +47,7 @@ defmodule Datjournaal.PostControllerTest do
     conn = conn
            |> guardian_login(insert(:user))
     post conn, post_path(conn, :create), post: @valid_attrs
-    post = Repo.get_by(Post, @valid_attrs)
+    post = Repo.one(from x in Post, order_by: [desc: x.id], limit: 1)
     assert post.slug != nil
   end
 
@@ -56,7 +56,7 @@ defmodule Datjournaal.PostControllerTest do
     conn = conn
            |> guardian_login(current_user)
     post conn, post_path(conn, :create), post: @valid_attrs
-    post = Repo.get_by(Post, @valid_attrs) |> Repo.preload(:user)
+    post = Repo.one(from x in Post, order_by: [desc: x.id], limit: 1) |> Repo.preload(:user)
     assert post.user.id == current_user.id
   end
 
