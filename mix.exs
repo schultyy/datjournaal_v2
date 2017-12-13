@@ -47,7 +47,7 @@ defmodule Datjournaal.Mixfile do
      {:ex_machina, "~> 2.0"},
      {:extwitter, "~> 0.8.3"},
      {:timex, "~> 3.0"},
-     {:exvcr, "~> 0.7", only: :test},
+     {:exvcr, "~> 0.8", only: :test},
      {:httpotion, "~> 3.0.2"},
      {:calendar, "~> 0.14.2"},
      {:exrm, "~> 1.0.8"},

@@ -1,0 +1,21 @@
+language: elixir
+elixir: '1.4.5'
+otp_release: '19.0'
+cache:
+  directories:
+    - deps
+before_install:
+  - cp config/dev.exs.example config/dev.exs
+  - cp config/test.exs.example config/test.exs
+services:
+  - postgresql
+env:
+  global:
+    - PG_USERNAME: postgres
+    - PG_PASSWORD:
+    - PG_HOST: 127.0.0.1
+before_script:
+  - mix ecto.create
+  - mix ecto.reset
+  - MIX_ENV=test mix ecto.reset
+script: mix test
