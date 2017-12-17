@@ -1,0 +1,1 @@
+docker run -it --rm --link postgres-datjournaal:postgres postgres psql -h postgres -U postgres

@@ -3,7 +3,7 @@ defmodule Datjournaal.PostControllerTest do
   use ExVCR.Mock
   import Datjournaal.Factory
 
-  alias Datjournaal.Post
+  alias Datjournaal.ImagePost
   @upload %Plug.Upload{content_type: "image/jpg", path: "test/fixtures/placeholder.jpg", filename: "placeholder.png"}
   @valid_attrs %{description: "some content", image: @upload}
   @invalid_attrs %{}
@@ -35,7 +35,7 @@ defmodule Datjournaal.PostControllerTest do
            |> guardian_login(insert(:user))
     conn = post conn, post_path(conn, :create), post: @valid_attrs
     assert redirected_to(conn) == post_path(conn, :index)
-    assert Repo.one(from x in Post, order_by: [desc: x.id], limit: 1)
+    assert Repo.one(from x in ImagePost, order_by: [desc: x.id], limit: 1)
   end
 
   test "creates resource and redirects when data is valid and user is not logged in", %{conn: conn} do
@@ -47,7 +47,7 @@ defmodule Datjournaal.PostControllerTest do
     conn = conn
            |> guardian_login(insert(:user))
     post conn, post_path(conn, :create), post: @valid_attrs
-    post = Repo.one(from x in Post, order_by: [desc: x.id], limit: 1)
+    post = Repo.one(from x in ImagePost, order_by: [desc: x.id], limit: 1)
     assert post.slug != nil
   end
 
@@ -56,7 +56,7 @@ defmodule Datjournaal.PostControllerTest do
     conn = conn
            |> guardian_login(current_user)
     post conn, post_path(conn, :create), post: @valid_attrs
-    post = Repo.one(from x in Post, order_by: [desc: x.id], limit: 1) |> Repo.preload(:user)
+    post = Repo.one(from x in ImagePost, order_by: [desc: x.id], limit: 1) |> Repo.preload(:user)
     assert post.user.id == current_user.id
   end
 
@@ -71,7 +71,7 @@ defmodule Datjournaal.PostControllerTest do
     user = insert(:user)
     changeset = user
             |> build_assoc(:posts)
-            |> Post.changeset(@valid_attrs)
+            |> ImagePost.changeset(@valid_attrs)
     post = Repo.insert! changeset
     conn = get conn, post_path(conn, :show, post.slug)
     assert conn.status == 200
@@ -87,24 +87,24 @@ defmodule Datjournaal.PostControllerTest do
     user = insert(:user)
     changeset = user
             |> build_assoc(:posts)
-            |> Post.changeset(@valid_attrs)
+            |> ImagePost.changeset(@valid_attrs)
     post = Repo.insert! changeset
     conn = conn
            |> guardian_login(user)
     conn = delete conn, post_path(conn, :delete, post.slug)
     assert redirected_to(conn) == post_path(conn, :index)
-    refute Repo.get(Post, post.id)
+    refute Repo.get(ImagePost, post.id)
   end
 
   test "does not delete chosen resource when user is not authenticated", %{conn: conn} do
     user = insert(:user)
     changeset = user
             |> build_assoc(:posts)
-            |> Post.changeset(@valid_attrs)
+            |> ImagePost.changeset(@valid_attrs)
     post = Repo.insert! changeset
     conn = delete conn, post_path(conn, :delete, post.slug)
     assert redirected_to(conn) == session_path(conn, :new)
-    assert Repo.get(Post, post.id)
+    assert Repo.get(ImagePost, post.id)
   end
 
   test "does not delete chosen resource when it doesn't belong to current user", %{conn: conn} do
@@ -114,11 +114,11 @@ defmodule Datjournaal.PostControllerTest do
            |> guardian_login(alice)
     changeset = bob
                 |> build_assoc(:posts)
-                |> Post.changeset(@valid_attrs)
+                |> ImagePost.changeset(@valid_attrs)
     post = Repo.insert!(changeset)
     conn = delete conn, post_path(conn, :delete, post.slug)
     assert redirected_to(conn) == post_path(conn, :show, post.slug)
-    assert Repo.get(Post, post.id)
+    assert Repo.get(ImagePost, post.id)
   end
 
   test "create post with Google Places Id queries for lat/long and displayname", %{conn: conn} do
@@ -129,7 +129,7 @@ defmodule Datjournaal.PostControllerTest do
       places_id = "ChIJT8RwZwaPsUcRhkKYaCqr5LI" #Elbphilharmonie Hamburg, Platz der Deutschen Einheit, Hamburg, Germany
       form_data = %{description: "some content", image: @upload, places_id: places_id}
       response = post conn, post_path(conn, :create), post: form_data
-      post = Repo.one(from x in Datjournaal.Post, order_by: [desc: x.id], limit: 1)
+      post = Repo.one(from x in ImagePost, order_by: [desc: x.id], limit: 1)
       assert response.status == 302
       assert post.lat == 53.54133059999999
       assert post.lng == 9.9841274

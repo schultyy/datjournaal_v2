@@ -1,10 +1,10 @@
 defmodule Datjournaal.TrackingController do
   use Datjournaal.Web, :controller
 
-  alias Datjournaal.{Repo, Post}
+  alias Datjournaal.{Repo, ImagePost}
 
   def log_visit(conn, %{ "id" => slug}) do
-    Repo.get_by!(Post, slug: slug)
+    Repo.get_by!(ImagePost, slug: slug)
     |> create_visit(conn)
     render(conn, "tracking.json", %{})
   end
@@ -14,7 +14,7 @@ defmodule Datjournaal.TrackingController do
     stats = Datjournaal.Stat.changeset(%Datjournaal.Stat{}, %{
       unique_identifier: retrieve_ip_address(conn),
       authenticated: authenticated,
-      post_id: post.id
+      image_post_id: post.id
     })
     Repo.insert!(stats)
   end

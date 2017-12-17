@@ -1,10 +1,10 @@
 defmodule Datjournaal.TweetTest do
   use Datjournaal.ModelCase
 
-  alias Datjournaal.{Tweet, Post}
+  alias Datjournaal.{Tweet, ImagePost}
 
   test "generates correct url for post" do
-    post = %Post{slug: UUID.uuid4(:hex)}
+    post = %ImagePost{slug: UUID.uuid4(:hex)}
     assert Tweet.to_url(post) == "http://datjournaal.de/#{post.slug}"
   end
 

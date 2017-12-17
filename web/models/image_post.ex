@@ -1,8 +1,8 @@
-defmodule Datjournaal.Post do
+defmodule Datjournaal.ImagePost do
   use Datjournaal.Web, :model
   use Arc.Ecto.Schema
 
-  schema "posts" do
+  schema "image_posts" do
     field :description, :string
     field :image, Datjournaal.Image.Type
     field :slug, :string
