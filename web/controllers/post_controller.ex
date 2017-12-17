@@ -42,7 +42,7 @@ defmodule Datjournaal.PostController do
         post_to_twitter(create_tweet, post_with_user)
         conn
         |> put_flash(:info, "Post created successfully.")
-        |> redirect(to: post_path(conn, :index))
+        |> redirect(to: index_path(conn, :index))
       {:error, changeset} ->
         render(conn, "new.html", %{ changeset: changeset, current_user: Repo.preload(current_user, :twitterkey) })
     end
@@ -68,7 +68,7 @@ defmodule Datjournaal.PostController do
         Repo.delete!(post)
         conn
         |> put_flash(:info, "Post deleted successfully.")
-        |> redirect(to: post_path(conn, :index))
+        |> redirect(to: index_path(conn, :index))
       true ->
         conn
         |> put_flash(:error, "You cannot delete posts which don't belong to you")

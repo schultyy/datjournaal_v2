@@ -29,7 +29,7 @@ defmodule Datjournaal.Router do
   scope "/", Datjournaal do
     pipe_through [:browser, :with_session]
 
-    get "/", PostController, :index
+    get "/", IndexController, :index
     resources "/sessions", SessionController, only: [:new, :create, :delete]
 
     scope "/" do

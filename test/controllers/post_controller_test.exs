@@ -13,11 +13,6 @@ defmodule Datjournaal.PostControllerTest do
     :ok
   end
 
-  test "lists all entries on index", %{conn: conn} do
-    conn = get conn, post_path(conn, :index)
-    assert conn.status == 200
-  end
-
   test "renders form for new resources", %{conn: conn} do
     conn = conn
            |> guardian_login(insert(:user))
@@ -34,7 +29,7 @@ defmodule Datjournaal.PostControllerTest do
     conn = conn
            |> guardian_login(insert(:user))
     conn = post conn, post_path(conn, :create), image_post: @valid_attrs
-    assert redirected_to(conn) == post_path(conn, :index)
+    assert redirected_to(conn) == index_path(conn, :index)
     assert Repo.one(from x in ImagePost, order_by: [desc: x.id], limit: 1)
   end
 
@@ -92,7 +87,7 @@ defmodule Datjournaal.PostControllerTest do
     conn = conn
            |> guardian_login(user)
     conn = delete conn, post_path(conn, :delete, post.slug)
-    assert redirected_to(conn) == post_path(conn, :index)
+    assert redirected_to(conn) == index_path(conn, :index)
     refute Repo.get(ImagePost, post.id)
   end
 
