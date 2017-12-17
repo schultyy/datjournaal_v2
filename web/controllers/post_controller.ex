@@ -3,7 +3,7 @@ defmodule Datjournaal.PostController do
   import Ecto.Changeset
   alias Datjournaal.ImagePost
 
-  plug :scrub_params, "post" when action in [:create]
+  plug :scrub_params, "image_post" when action in [:create]
 
   def index(conn, params) do
     posts =
@@ -26,7 +26,7 @@ defmodule Datjournaal.PostController do
     render(conn, "new.html", %{changeset: changeset, current_user: Repo.preload(current_user, :twitterkey)})
   end
 
-  def create(conn, %{"post" => post_params}) do
+  def create(conn, %{"image_post" => post_params}) do
     current_user = conn.assigns.current_user
 
     changeset = current_user

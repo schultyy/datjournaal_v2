@@ -22,7 +22,7 @@ defmodule Datjournaal.PostControllerTest do
     conn = conn
            |> guardian_login(insert(:user))
     conn = get conn, post_path(conn, :new)
-    assert html_response(conn, 200) =~ "Create a new post"
+    assert html_response(conn, 200) =~ "Create a new Image post"
   end
 
   test "does not render form for new resources when user is not logged in", %{conn: conn} do
@@ -33,20 +33,20 @@ defmodule Datjournaal.PostControllerTest do
   test "creates resource and redirects when data is valid and user is logged in", %{conn: conn} do
     conn = conn
            |> guardian_login(insert(:user))
-    conn = post conn, post_path(conn, :create), post: @valid_attrs
+    conn = post conn, post_path(conn, :create), image_post: @valid_attrs
     assert redirected_to(conn) == post_path(conn, :index)
     assert Repo.one(from x in ImagePost, order_by: [desc: x.id], limit: 1)
   end
 
   test "creates resource and redirects when data is valid and user is not logged in", %{conn: conn} do
-    conn = post conn, post_path(conn, :create), post: @valid_attrs
+    conn = post conn, post_path(conn, :create), image_post: @valid_attrs
     assert redirected_to(conn) == session_path(conn, :new)
   end
 
   test "creates resource and calculates a slug", %{conn: conn} do
     conn = conn
            |> guardian_login(insert(:user))
-    post conn, post_path(conn, :create), post: @valid_attrs
+    post conn, post_path(conn, :create), image_post: @valid_attrs
     post = Repo.one(from x in ImagePost, order_by: [desc: x.id], limit: 1)
     assert post.slug != nil
   end
@@ -55,7 +55,7 @@ defmodule Datjournaal.PostControllerTest do
     current_user = insert(:user)
     conn = conn
            |> guardian_login(current_user)
-    post conn, post_path(conn, :create), post: @valid_attrs
+    post conn, post_path(conn, :create), image_post: @valid_attrs
     post = Repo.one(from x in ImagePost, order_by: [desc: x.id], limit: 1) |> Repo.preload(:user)
     assert post.user.id == current_user.id
   end
@@ -63,8 +63,8 @@ defmodule Datjournaal.PostControllerTest do
   test "does not create resource and renders errors when data is invalid", %{conn: conn} do
     conn = conn
            |> guardian_login(insert(:user))
-    conn = post conn, post_path(conn, :create), post: @invalid_attrs
-    assert html_response(conn, 200) =~ "Create a new post"
+    conn = post conn, post_path(conn, :create), image_post: @invalid_attrs
+    assert html_response(conn, 200) =~ "Create a new Image post"
   end
 
   test "shows chosen resource", %{conn: conn} do
@@ -128,7 +128,7 @@ defmodule Datjournaal.PostControllerTest do
             |> guardian_login(current_user)
       places_id = "ChIJT8RwZwaPsUcRhkKYaCqr5LI" #Elbphilharmonie Hamburg, Platz der Deutschen Einheit, Hamburg, Germany
       form_data = %{description: "some content", image: @upload, places_id: places_id}
-      response = post conn, post_path(conn, :create), post: form_data
+      response = post conn, post_path(conn, :create), image_post: form_data
       post = Repo.one(from x in ImagePost, order_by: [desc: x.id], limit: 1)
       assert response.status == 302
       assert post.lat == 53.54133059999999
