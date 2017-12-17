@@ -48,11 +48,6 @@ defmodule Datjournaal.PostController do
     end
   end
 
-  def show(conn, %{"slug" => slug}) do
-    post = Repo.get_by!(ImagePost, slug: slug) |> Repo.preload(:user)
-    render(conn, "show.html", post: post)
-  end
-
   def edit(conn, %{"id" => id}) do
     post = Repo.get!(ImagePost, id)
     changeset = ImagePost.changeset(post)
@@ -72,7 +67,7 @@ defmodule Datjournaal.PostController do
       true ->
         conn
         |> put_flash(:error, "You cannot delete posts which don't belong to you")
-        |> redirect(to: post_path(conn, :show, post.slug))
+        |> redirect(to: index_path(conn, :show, post.slug))
     end
   end
 

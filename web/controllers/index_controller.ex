@@ -16,4 +16,9 @@ defmodule Datjournaal.IndexController do
           total_pages: posts.total_pages,
           total_entries: posts.total_entries
   end
+
+  def show(conn, %{"slug" => slug}) do
+    post = Repo.get_by!(ImagePost, slug: slug) |> Repo.preload(:user)
+    render(conn, "show.html", post: post)
+  end
 end

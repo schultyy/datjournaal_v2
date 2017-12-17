@@ -62,22 +62,6 @@ defmodule Datjournaal.PostControllerTest do
     assert html_response(conn, 200) =~ "Create a new Image post"
   end
 
-  test "shows chosen resource", %{conn: conn} do
-    user = insert(:user)
-    changeset = user
-            |> build_assoc(:posts)
-            |> ImagePost.changeset(@valid_attrs)
-    post = Repo.insert! changeset
-    conn = get conn, post_path(conn, :show, post.slug)
-    assert conn.status == 200
-  end
-
-  test "renders page not found when id is nonexistent", %{conn: conn} do
-    assert_error_sent 404, fn ->
-      get conn, post_path(conn, :show, -1)
-    end
-  end
-
   test "deletes chosen resource", %{conn: conn} do
     user = insert(:user)
     changeset = user
@@ -112,7 +96,7 @@ defmodule Datjournaal.PostControllerTest do
                 |> ImagePost.changeset(@valid_attrs)
     post = Repo.insert!(changeset)
     conn = delete conn, post_path(conn, :delete, post.slug)
-    assert redirected_to(conn) == post_path(conn, :show, post.slug)
+    assert redirected_to(conn) == index_path(conn, :show, post.slug)
     assert Repo.get(ImagePost, post.id)
   end
 
