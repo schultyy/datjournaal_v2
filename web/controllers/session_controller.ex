@@ -26,7 +26,7 @@ defmodule Datjournaal.SessionController do
       {:ok, conn} ->
         conn
         |> put_flash(:info, "You’re now logged in!")
-        |> redirect(to: post_path(conn, :index))
+        |> redirect(to: image_post_path(conn, :index))
       {:error, _reason, conn} ->
         conn
         |> put_flash(:error, "Invalid email/password combination")
@@ -38,7 +38,7 @@ defmodule Datjournaal.SessionController do
     conn
     |> logout
     |> put_flash(:info, "See you later!")
-    |> redirect(to: post_path(conn, :index))
+    |> redirect(to: image_post_path(conn, :index))
   end
 
   defp login(conn, user) do

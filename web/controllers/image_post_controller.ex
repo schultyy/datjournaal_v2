@@ -1,4 +1,4 @@
-defmodule Datjournaal.PostController do
+defmodule Datjournaal.ImagePostController do
   use Datjournaal.Web, :controller
   import Ecto.Changeset
   alias Datjournaal.ImagePost

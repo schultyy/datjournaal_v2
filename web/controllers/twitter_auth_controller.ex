@@ -30,19 +30,19 @@ defmodule Datjournaal.TwitterAuthController do
       access_token_secret: access_token.oauth_token_secret
     })
 
-    redirect conn, to: Router.Helpers.post_path(conn, :index)
+    redirect conn, to: Router.Helpers.image_post_path(conn, :index)
   end
 
   def callback(conn, %{"denied" => _}) do
     conn
     |> put_flash(:error, "You did not give us access to your account")
-    |> redirect(to: Router.Helpers.post_path(conn, :index))
+    |> redirect(to: Router.Helpers.image_post_path(conn, :index))
   end
 
   def logout(conn, _params) do
     conn
     |> configure_session(drop: true)
-    |> redirect(to: Router.Helpers.post_path(conn, :index))
+    |> redirect(to: Router.Helpers.image_post_path(conn, :index))
   end
 
   defp create_key_or_update(conn, params) do
