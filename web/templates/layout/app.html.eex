@@ -40,7 +40,7 @@
         <%= if @current_user do %>
           <li>
             <%= link to: image_post_path(@conn, :new) do %>
-              <i class="fa fa-plus" aria-hidden="true"></i>
+              <i class="fa fa-picture-o" aria-hidden="true"></i>
             <% end %>
           </li>
           <li>
