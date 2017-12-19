@@ -37,11 +37,13 @@ defmodule Datjournaal.Router do
       resources "/posts", ImagePostController, only: [:create, :delete, :new]
       resources "/settings", UserSettingsController, only: [:index, :delete]
       resources "/stats", UserStatsController, only: [:index]
+      resources "/text_posts", TextPostController, only: [:new, :edit, :create, :delete, :update]
       get "/auth/request", TwitterAuthController, :request
       get "/auth/callback", TwitterAuthController, :callback
       get "/auth/logout", TwitterAuthController, :logout
     end
     get "/about", StaticPagesController, :about
+    resources "/text_posts", TextPostController, only: [:show]
     get "/:slug", IndexController, :show #This has to be the last route in the file because it acts as a catch-all
   end
   # Other scopes may use custom stacks.

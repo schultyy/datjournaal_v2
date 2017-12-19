@@ -1,0 +1,23 @@
+<h2>Show text post</h2>
+
+<ul>
+
+  <li>
+    <strong>Title:</strong>
+    <%= @text_post.title %>
+  </li>
+
+  <li>
+    <strong>Content:</strong>
+    <%= @text_post.content %>
+  </li>
+
+  <li>
+    <strong>User:</strong>
+    <%= @text_post.user_id %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: text_post_path(@conn, :edit, @text_post) %>
+<%= link "Back", to: index_path(@conn, :index) %>
