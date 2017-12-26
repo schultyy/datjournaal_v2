@@ -44,6 +44,11 @@
             <% end %>
           </li>
           <li>
+            <%= link to: text_post_path(@conn, :new) do %>
+              <i class="fa fa-plus" aria-hidden="true"></i>
+            <% end %>
+          </li>
+          <li>
             <%= link to: user_settings_path(@conn, :index) do %>
               <i class="fa fa-sliders" aria-hidden="true"></i>
             <% end %>
