@@ -1,6 +1,5 @@
 defmodule Datjournaal.IndexControllerTest do
   use Datjournaal.ConnCase
-  use ExVCR.Mock
   import Datjournaal.Factory
 
   alias Datjournaal.ImagePost
@@ -9,10 +8,8 @@ defmodule Datjournaal.IndexControllerTest do
 
   test "lists all entries on index", %{conn: conn} do
     user = insert(:user)
-    changeset = user
-            |> build_assoc(:posts)
-            |> ImagePost.changeset(@valid_attrs)
-    Repo.insert! changeset
+    _text_post = insert(:text_post, %{ user: user })
+    _post = insert(:post, %{ user: user })
     conn = get conn, index_path(conn, :index)
     assert conn.status == 200
   end

@@ -20,4 +20,12 @@ defmodule Datjournaal.Factory do
       slug: "12345"
     }
   end
+
+  def text_post_factory do
+    %Datjournaal.TextPost {
+      content: "Dies, Das, Ananas",
+      title: "Dieses und jenes",
+      user: build(:user)
+    }
+  end
 end
