@@ -12,7 +12,7 @@ defmodule Datjournaal.IndexRepositoryTest do
     insert(:post, %{ user: user })
 
     all = IndexRepository.get_all()
-    assert List.first(all).inserted_at < List.last(all).inserted_at
+    assert List.first(all).inserted_at > List.last(all).inserted_at
   end
 
   test "returns both text and image posts paginated" do

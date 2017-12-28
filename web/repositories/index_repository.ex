@@ -20,7 +20,7 @@ defmodule Datjournaal.IndexRepository do
       |> Repo.paginate(params)
 
     all_posts = Enum.concat(image_posts, text_posts)
-    Enum.sort_by(all_posts, &(&1.inserted_at))
+    Enum.sort(all_posts, &(&1.inserted_at >= &2.inserted_at))
     |> Scrivener.paginate(pagination_config)
   end
 
@@ -36,7 +36,7 @@ defmodule Datjournaal.IndexRepository do
       |> preload(:user)
 
     all_posts = Enum.concat(Repo.all(image_posts), Repo.all(text_posts))
-    Enum.sort_by(all_posts,  &(&1.inserted_at))
+    Enum.sort(all_posts, &(&1.inserted_at >= &2.inserted_at))
   end
 
   defp maybe_put_default_config(%{page: _page_number, page_size: _page_size} = params), do: params
