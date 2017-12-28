@@ -16,7 +16,7 @@ config :datjournaal, Datjournaal.Repo,
   password: System.get_env("PG_PASSWORD"),
   hostname: System.get_env("PG_HOST"),
   database: "datjournaal_test",
-  pool: Ecto.Adapters.SQL.Sandbox
+  pool: Ecto.Adapters.SQL.Sandbox,
   ownership_timeout: 60000
 
 config :datjournaal, gmaps_api_key: "<YOUR API KEY>"
