@@ -21,7 +21,7 @@ defmodule Datjournaal.TextPostController do
     end
   end
 
-  def show(conn, %{"id" => id}) do
+  def show(conn, %{"slug" => id}) do
     text_post = Repo.get!(TextPost, id)
     render(conn, "show.html", text_post: text_post)
   end

@@ -43,8 +43,9 @@ defmodule Datjournaal.Router do
       get "/auth/logout", TwitterAuthController, :logout
     end
     get "/about", StaticPagesController, :about
-    resources "/text_posts", TextPostController, only: [:show]
-    get "/:slug", IndexController, :show #This has to be the last route in the file because it acts as a catch-all
+    get "/texts/:slug", TextPostController, :show
+    get "/images/:slug", IndexController, :show_image
+    get "/:slug", IndexController, :show_legacy #This has to be the last route in the file because it acts as a catch-all
   end
   # Other scopes may use custom stacks.
   scope "/api", Datjournaal do

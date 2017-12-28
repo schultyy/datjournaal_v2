@@ -1,4 +1,4 @@
-<%= link to: index_path(@conn, :show, @post.slug) do %>
+<%= link to: text_post_path(@conn, :show, @post.slug) do %>
   <div class="title">
     <%= @post.title %>
   </div>

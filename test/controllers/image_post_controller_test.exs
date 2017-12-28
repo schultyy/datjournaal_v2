@@ -96,7 +96,7 @@ defmodule Datjournaal.ImagePostControllerTest do
                 |> ImagePost.changeset(@valid_attrs)
     post = Repo.insert!(changeset)
     conn = delete conn, image_post_path(conn, :delete, post.slug)
-    assert redirected_to(conn) == index_path(conn, :show, post.slug)
+    assert redirected_to(conn) == index_path(conn, :show_image, post.slug)
     assert Repo.get(ImagePost, post.id)
   end
 

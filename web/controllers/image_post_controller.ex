@@ -67,7 +67,7 @@ defmodule Datjournaal.ImagePostController do
       true ->
         conn
         |> put_flash(:error, "You cannot delete posts which don't belong to you")
-        |> redirect(to: index_path(conn, :show, post.slug))
+        |> redirect(to: index_path(conn, :show_image, post.slug))
     end
   end
 

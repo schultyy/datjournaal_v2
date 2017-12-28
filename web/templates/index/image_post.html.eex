@@ -1,4 +1,4 @@
-<%= link to: index_path(@conn, :show, @post.slug) do %>
+<%= link to: index_path(@conn, :show_image, @post.slug) do %>
   <img src="<%= photo_url(@post, :thumb) %>" />
   <div class="meta">
     <div class="meta-item location">
