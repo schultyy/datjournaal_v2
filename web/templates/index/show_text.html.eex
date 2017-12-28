@@ -1,23 +1,14 @@
-<h2>Show text post</h2>
+<div class="text-post">
+  <h1><%= @post.title %></h1>
+  <div class="author">
+    by <%= @post.user.name %>
+  </div>
+  <div class="content">
+    <pre>
+      <%= @post.content %>
+    </pre>
+  </div>
 
-<ul>
-
-  <li>
-    <strong>Title:</strong>
-    <%= @post.title %>
-  </li>
-
-  <li>
-    <strong>Content:</strong>
-    <%= @post.content %>
-  </li>
-
-  <li>
-    <strong>User:</strong>
-    <%= @post.user_id %>
-  </li>
-
-</ul>
-
-<%= link "Edit", to: text_post_path(@conn, :edit, @post) %>
-<%= link "Back", to: index_path(@conn, :index) %>
+  <%= link "Delete this post", to: text_post_path(@conn, :delete, @post.slug), method: :delete, data: [confirm: "Really?"] %>
+  <%= link "Back", to: index_path(@conn, :index) %>
+</div>
