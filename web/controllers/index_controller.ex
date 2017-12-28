@@ -1,13 +1,10 @@
 defmodule Datjournaal.IndexController do
   use Datjournaal.Web, :controller
-  alias Datjournaal.ImagePost
+  alias Datjournaal.{ImagePost, IndexRepository}
 
   def index(conn, params) do
-    posts =
-      ImagePost
-      |> order_by(desc: :inserted_at)
-      |> preload(:user)
-      |> Repo.paginate(params)
+    posts = IndexRepository.get_all(params)
+
     render conn,
           "index.html",
           posts: posts,

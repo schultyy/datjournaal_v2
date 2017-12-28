@@ -1,0 +1,14 @@
+<%= link to: index_path(@conn, :show, @post.slug) do %>
+  <img src="<%= photo_url(@post, :thumb) %>" />
+  <div class="meta">
+    <div class="meta-item location">
+      <%= if @post.short_location_name do %>
+        <i class="fa fa-map-marker" aria-hidden="true"></i>
+        <%= @post.short_location_name %>
+      <% end %>
+    </div>
+    <div class="meta-item author">
+      <%= @post.user.name %>
+    </div>
+  </div>
+<% end %>

@@ -24,7 +24,7 @@ defmodule Datjournaal.TextPostControllerTest do
   test "creates resource and calculates a slug", %{conn: conn} do
     conn = conn
            |> guardian_login(insert(:user))
-    conn = post conn, text_post_path(conn, :create), text_post: @valid_attrs
+    post conn, text_post_path(conn, :create), text_post: @valid_attrs
     post = Repo.one(from x in TextPost, order_by: [desc: x.id], limit: 1)
     assert post.slug != nil
   end

@@ -1,0 +1,8 @@
+<%= link to: index_path(@conn, :show, @post.slug) do %>
+  <div class="title">
+    <%= @post.title %>
+  </div>
+  <div class="content">
+    <%= @post.content %>
+  </div>
+<% end %>

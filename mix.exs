@@ -53,7 +53,8 @@ defmodule Datjournaal.Mixfile do
      {:calendar, "~> 0.14.2"},
      {:exrm, "~> 1.0.8"},
      {:plug, "~> 1.3"},
-     {:scrivener_ecto, "~> 1.3"}]
+     {:scrivener_ecto, "~> 1.3"},
+     {:scrivener_list, "~> 1.0"}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.
