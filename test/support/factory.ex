@@ -25,7 +25,8 @@ defmodule Datjournaal.Factory do
     %Datjournaal.TextPost {
       content: "Dies, Das, Ananas",
       title: "Dieses und jenes",
-      user: build(:user)
+      user: build(:user),
+      slug: "467567"
     }
   end
 end

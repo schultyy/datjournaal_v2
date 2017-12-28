@@ -24,7 +24,7 @@ defmodule Datjournaal.ImagePost do
     |> cast(params, [:description, :places_id])
     |> cast_attachments(params, [:image])
     |> validate_required([:image])
-    |> create_slug
+    |> create_slug()
     |> assoc_constraint(:user)
   end
 
