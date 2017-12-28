@@ -9,7 +9,11 @@ defmodule Datjournaal.TextPostController do
   end
 
   def create(conn, %{"text_post" => text_post_params}) do
-    changeset = TextPost.changeset(%TextPost{}, text_post_params)
+    current_user = conn.assigns.current_user
+
+    changeset = current_user
+                |> build_assoc(:text_posts)
+                |> TextPost.changeset(text_post_params)
 
     case Repo.insert(changeset) do
       {:ok, _text_post} ->

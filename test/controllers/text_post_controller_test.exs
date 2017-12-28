@@ -29,6 +29,15 @@ defmodule Datjournaal.TextPostControllerTest do
     assert post.slug != nil
   end
 
+  test "creates resource and assigns current user", %{conn: conn} do
+    user = insert(:user)
+    conn = conn
+           |> guardian_login(user)
+    post conn, text_post_path(conn, :create), text_post: @valid_attrs
+    post = Repo.one(from x in TextPost, order_by: [desc: x.id], limit: 1)
+    assert post.user_id == user.id
+  end
+
   test "does not create resource and renders errors when data is invalid", %{conn: conn} do
     conn = conn
            |> guardian_login(insert(:user))

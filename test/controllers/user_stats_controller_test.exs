@@ -2,8 +2,6 @@ defmodule Datjournaal.UserStatsControllerTest do
   use Datjournaal.ConnCase
   import Datjournaal.Factory
 
-  alias Datjournaal.ImagePost
-
   test "renders user stats page", %{conn: conn} do
     user = insert(:user)
     post = insert(:post, user: user)
