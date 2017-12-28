@@ -21,11 +21,6 @@ defmodule Datjournaal.TextPostController do
     end
   end
 
-  def show(conn, %{"slug" => id}) do
-    text_post = Repo.get!(TextPost, id)
-    render(conn, "show.html", text_post: text_post)
-  end
-
   def edit(conn, %{"id" => id}) do
     text_post = Repo.get!(TextPost, id)
     changeset = TextPost.changeset(text_post)
@@ -40,7 +35,7 @@ defmodule Datjournaal.TextPostController do
       {:ok, text_post} ->
         conn
         |> put_flash(:info, "Text post updated successfully.")
-        |> redirect(to: text_post_path(conn, :show, text_post))
+        |> redirect(to: index_path(conn, :show_text, text_post))
       {:error, changeset} ->
         render(conn, "edit.html", text_post: text_post, changeset: changeset)
     end
