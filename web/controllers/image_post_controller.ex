@@ -30,7 +30,7 @@ defmodule Datjournaal.ImagePostController do
     current_user = conn.assigns.current_user
 
     changeset = current_user
-                |> build_assoc(:posts)
+                |> build_assoc(:image_posts)
                 |> ImagePost.changeset(post_params)
                 |> fetch_location
 

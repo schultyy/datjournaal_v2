@@ -3,15 +3,10 @@ defmodule Datjournaal.UserStatsControllerTest do
   import Datjournaal.Factory
 
   alias Datjournaal.ImagePost
-  @upload %Plug.Upload{content_type: "image/jpg", path: "test/fixtures/placeholder.jpg", filename: "placeholder.png"}
-  @valid_attrs %{description: "some content", image: @upload}
 
   test "renders user stats page", %{conn: conn} do
     user = insert(:user)
-    changeset = user
-            |> build_assoc(:posts)
-            |> ImagePost.changeset(@valid_attrs)
-    post = Repo.insert! changeset
+    post = insert(:post, user: user)
 
     stats = Datjournaal.Stat.changeset(%Datjournaal.Stat{}, %{
       unique_identifier: "127.0.0.1",

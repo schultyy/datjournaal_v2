@@ -64,10 +64,7 @@ defmodule Datjournaal.ImagePostControllerTest do
 
   test "deletes chosen resource", %{conn: conn} do
     user = insert(:user)
-    changeset = user
-            |> build_assoc(:posts)
-            |> ImagePost.changeset(@valid_attrs)
-    post = Repo.insert! changeset
+    post = insert(:post, user: user)
     conn = conn
            |> guardian_login(user)
     conn = delete conn, image_post_path(conn, :delete, post.slug)
@@ -77,10 +74,7 @@ defmodule Datjournaal.ImagePostControllerTest do
 
   test "does not delete chosen resource when user is not authenticated", %{conn: conn} do
     user = insert(:user)
-    changeset = user
-            |> build_assoc(:posts)
-            |> ImagePost.changeset(@valid_attrs)
-    post = Repo.insert! changeset
+    post = insert(:post, user: user)
     conn = delete conn, image_post_path(conn, :delete, post.slug)
     assert redirected_to(conn) == session_path(conn, :new)
     assert Repo.get(ImagePost, post.id)
@@ -91,10 +85,7 @@ defmodule Datjournaal.ImagePostControllerTest do
     bob = insert(:user)
     conn = conn
            |> guardian_login(alice)
-    changeset = bob
-                |> build_assoc(:posts)
-                |> ImagePost.changeset(@valid_attrs)
-    post = Repo.insert!(changeset)
+    post = insert(:post, user: bob)
     conn = delete conn, image_post_path(conn, :delete, post.slug)
     assert redirected_to(conn) == index_path(conn, :show_image, post.slug)
     assert Repo.get(ImagePost, post.id)
