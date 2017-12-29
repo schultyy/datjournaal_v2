@@ -20,7 +20,9 @@ defmodule Datjournaal.IndexRepository do
       |> Repo.paginate(params)
 
     all_posts = Enum.concat(image_posts, text_posts)
-    Enum.sort(all_posts, &(&1.inserted_at >= &2.inserted_at))
+    Enum.sort(all_posts, fn(left, right) ->
+      NaiveDateTime.compare(left.inserted_at, right.inserted_at) == :gt
+    end)
     |> Scrivener.paginate(pagination_config)
   end
 
