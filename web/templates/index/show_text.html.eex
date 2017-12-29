@@ -1,14 +1,20 @@
 <div class="text-post">
   <h1><%= @post.title %></h1>
-  <div class="author">
-    by <%= @post.user.name %>
-  </div>
   <div class="content">
     <pre>
       <%= @post.content %>
     </pre>
   </div>
 
-  <%= link "Delete this post", to: text_post_path(@conn, :delete, @post.slug), method: :delete, data: [confirm: "Really?"] %>
-  <%= link "Back", to: index_path(@conn, :index) %>
+  <div class="date">
+    <%= format_time(@post.inserted_at) %>
+  </div>
+
+  <div class="author">
+    by <%= @post.user.name %>
+  </div>
+
+  <%= if belongs_to_user?(@post, @current_user) do %>
+    <%= link "Delete this post", to: text_post_path(@conn, :delete, @post.slug), method: :delete, data: [confirm: "Really?"] %>
+  <% end %>
 </div>
