@@ -21,10 +21,11 @@ defmodule Datjournaal.IndexView do
   end
 
   def teaser_text(text) do
-    if String.length(text) < 100 do
+    teaser_char_length = 200
+    if String.length(text) < teaser_char_length do
       text
     else
-      String.slice(text, 0, 100) <> "..."
+      String.slice(text, 0, teaser_char_length) <> "..."
     end
   end
 end
