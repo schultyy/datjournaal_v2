@@ -1,8 +1,10 @@
-<%= link to: index_path(@conn, :show_text, @post.slug) do %>
-  <div class="title">
+
+<div class="title">
+  <%= link to: index_path(@conn, :show_text, @post.slug) do %>
     <%= @post.title %>
-  </div>
-  <div class="content">
-    <%= @post.content %>
-  </div>
-<% end %>
+  <% end %>
+</div>
+
+<div class="content">
+  <%= teaser_text(@post.content) %>
+</div>
