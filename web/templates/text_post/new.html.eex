@@ -1,4 +1,4 @@
-<h2>New text post</h2>
+<h2>Publish a new text</h2>
 
 <%= render "form.html", changeset: @changeset,
                         action: text_post_path(@conn, :create) %>
