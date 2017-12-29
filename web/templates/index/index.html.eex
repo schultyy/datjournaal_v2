@@ -1,11 +1,16 @@
 <div class="tiles">
   <%= for post <- @posts do %>
     <div class="tile">
-      <%= if Map.has_key?(post, :image) do %>
-        <%= render "image_post.html", conn: @conn, post: post %>
-      <% else %>
-        <%= render "text_post.html", conn: @conn, post: post %>
-      <% end %>
+      <div class="body">
+        <%= if Map.has_key?(post, :image) do %>
+          <%= render "image_post.html", conn: @conn, post: post %>
+        <% else %>
+          <%= render "text_post.html", conn: @conn, post: post %>
+        <% end %>
+      </div>
+      <div class="date">
+        <%= format_date(post.inserted_at) %>
+      </div>
     </div>
   <% end %>
 </div>

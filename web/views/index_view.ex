@@ -16,6 +16,10 @@ defmodule Datjournaal.IndexView do
     Timex.format!(time, "%d.%m.%Y %H:%M", :strftime)
   end
 
+  def format_date(datetime) do
+    Timex.format!(datetime, "%d.%m.%Y", :strftime)
+  end
+
   def teaser_text(text) do
     if String.length(text) < 100 do
       text
