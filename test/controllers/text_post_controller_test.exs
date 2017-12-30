@@ -10,7 +10,7 @@ defmodule Datjournaal.TextPostControllerTest do
     conn = conn
            |> guardian_login(insert(:user))
     conn = get conn, text_post_path(conn, :new)
-    assert html_response(conn, 200) =~ "New text post"
+    assert html_response(conn, 200) =~ "Publish a new text"
   end
 
   test "creates resource and redirects when data is valid", %{conn: conn} do
@@ -42,7 +42,7 @@ defmodule Datjournaal.TextPostControllerTest do
     conn = conn
            |> guardian_login(insert(:user))
     conn = post conn, text_post_path(conn, :create), text_post: @invalid_attrs
-    assert html_response(conn, 200) =~ "New text post"
+    assert html_response(conn, 200) =~ "Publish a new text"
   end
 
   test "renders form for editing chosen resource", %{conn: conn} do
