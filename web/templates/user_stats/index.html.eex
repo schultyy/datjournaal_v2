@@ -1,10 +1,24 @@
 <div class="popular-posts">
   <h1>My popular posts</h1>
-  <div class="posts">
-    <%= for { post, visit_count } <- @my_posts do %>
-      <div class="post">
-        <%= link to: index_path(@conn, :show_image, post.slug) do %>
-          <img src="<%= photo_url(post) %>" />
+  <h1>Text posts</h1>
+  <div class="text-posts">
+    <%= for { text_post, visit_count } <- @my_text_posts do %>
+      <div class="text-post">
+        <%= link to: index_path(@conn, :show_text, text_post.slug) do %>
+          <h6><%= text_post.title %></h6>
+        <% end %>
+        <div class="visits">
+          <%= visit_count %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <h1>Photo posts</h1>
+  <div class="image-posts">
+    <%= for { image_post, visit_count } <- @my_image_posts do %>
+      <div class="image-post">
+        <%= link to: index_path(@conn, :show_image, image_post.slug) do %>
+          <img src="<%= photo_url(image_post) %>" />
           <div class="visits">
             <%= visit_count %>
           </div>

@@ -9,16 +9,26 @@ $.fn.exists = function () {
 
 $(document).ready(function() {
   var postDetail = $('.post-detail');
+  var textPost = $('.text-post-detail');
 
-  if(!postDetail.exists()) {
+  if(!postDetail.exists() && !textPost.exists()) {
     return;
   }
   try {
     var slug = window.location.href.substring(window.location.href.lastIndexOf('/') + 1);
+    if (window.location.href.indexOf('texts') !== -1) {
+      var type = 'text';
+    }
+    else if (window.location.href.indexOf('images') !== -1) {
+      var type = 'image';
+    } else {
+      var type = 'image';
+    }
+
     if(!slug) {
       return;
     }
-    var request = new Request('/api/v1/visit/' + slug, {method: 'POST', credentials: 'same-origin'});
+    var request = new Request('/api/v1/visit/'+ type +'/' + slug, {method: 'POST', credentials: 'same-origin'});
     fetch(request);
   }
   catch(err) {

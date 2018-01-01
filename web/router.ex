@@ -57,7 +57,8 @@ defmodule Datjournaal.Router do
         get "/location", LocationController, :get_location_for_name
       end
       scope "v1" do
-        post "/visit/:id", TrackingController, :log_visit
+        post "/visit/image/:id", TrackingController, :log_image_visit
+        post "/visit/text/:id", TrackingController, :log_text_visit
       end
     end
   end
