@@ -9,7 +9,7 @@ $.fn.exists = function () {
 
 $(document).ready(function() {
   var postDetail = $('.post-detail');
-  var textPost = $('.text-post');
+  var textPost = $('.text-post-detail');
 
   if(!postDetail.exists() && !textPost.exists()) {
     return;

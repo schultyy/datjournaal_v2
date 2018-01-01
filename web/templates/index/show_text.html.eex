@@ -1,4 +1,4 @@
-<div class="text-post">
+<div class="text-post-detail">
   <h1><%= @post.title %></h1>
   <div class="content">
     <pre>
