@@ -11,7 +11,7 @@ defmodule Datjournaal.TrackingController do
 
   defp create_visit(post, conn) do
     authenticated = conn.assigns.current_user != nil
-    stats = Datjournaal.Stat.changeset(%Datjournaal.Stat{}, %{
+    stats = Datjournaal.ImageStat.changeset(%Datjournaal.ImageStat{}, %{
       unique_identifier: retrieve_ip_address(conn),
       authenticated: authenticated,
       image_post_id: post.id

@@ -1,4 +1,4 @@
-defmodule Datjournaal.Stat do
+defmodule Datjournaal.ImageStat do
   use Datjournaal.Web, :model
 
   schema "image_stats" do

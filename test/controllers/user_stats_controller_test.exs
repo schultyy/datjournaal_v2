@@ -6,7 +6,7 @@ defmodule Datjournaal.UserStatsControllerTest do
     user = insert(:user)
     post = insert(:post, user: user)
 
-    stats = Datjournaal.Stat.changeset(%Datjournaal.Stat{}, %{
+    stats = Datjournaal.ImageStat.changeset(%Datjournaal.ImageStat{}, %{
       unique_identifier: "127.0.0.1",
       authenticated: false,
       image_post_id: post.id

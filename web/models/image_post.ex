@@ -12,7 +12,7 @@ defmodule Datjournaal.ImagePost do
     field :long_location_name, :string
     field :places_id, :string
     belongs_to :user, Datjournaal.User
-    has_many :stats, Datjournaal.Stat, on_delete: :delete_all
+    has_many :image_stats, Datjournaal.ImageStat, on_delete: :delete_all
     timestamps()
   end
 
