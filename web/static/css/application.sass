@@ -287,6 +287,7 @@ main
     h1
       padding-left: 10px
       padding-right: 10px
+      text-align: left
     .date
       padding-left: 10px
       padding-right: 10px
@@ -300,8 +301,14 @@ main
       padding-right: 10px
       font-size: $description-font-size
       font-family: $description-font
+      display: flex
+      flex-direction: column
+      align-items: center
       pre
         white-space: pre-wrap
+        text-align: left
+        padding: 5px
+        margin-top: -30px
 
 .footer
   position: fixed
@@ -515,3 +522,13 @@ main
         .description
           max-width: 1200px
           font-size: $description-font-size * 2
+    .text-post-detail
+      display: flex
+      flex-direction: column
+      justify-content: center
+      align-content: center
+      h1
+        text-align: center
+      .content
+        pre
+          margin-top: 5px
