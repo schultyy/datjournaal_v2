@@ -21,7 +21,7 @@ defmodule Datjournaal.Mixfile do
      applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
                     :phoenix_ecto, :postgrex, :arc_ecto, :comeonin, :timex, :httpotion,
                     :ex_machina, :guardian, :extwitter, :arc, :calendar, :oauther,
-                    :scrivener_ecto]]
+                    :scrivener_ecto, :scrivener_list]]
   end
 
   # Specifies which paths to compile per environment.
