@@ -14,7 +14,7 @@
         </div>
         <%= if belongs_to_user?(@post, @current_user) do %>
           <div class="user-actions">
-            <%= link "Delete this post", to: post_path(@conn, :delete, @post.slug), method: :delete, data: [confirm: "Really?"] %>
+            <%= link "Delete this post", to: image_post_path(@conn, :delete, @post.slug), method: :delete, data: [confirm: "Really?"] %>
           </div>
         <% end %>
       </div>

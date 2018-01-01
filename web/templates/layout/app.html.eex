@@ -15,7 +15,7 @@
   <body>
     <header class="header">
       <nav role="navigation">
-        <%= link "Dat Journaal", to: post_path(@conn, :index), class: "logo" %>
+        <%= link "Dat Journaal", to: index_path(@conn, :index), class: "logo" %>
         <%= link "About", to: static_pages_path(@conn, :about) %>
       </nav>
     </header>
@@ -39,7 +39,12 @@
       <ul class="list-inline menu">
         <%= if @current_user do %>
           <li>
-            <%= link to: post_path(@conn, :new) do %>
+            <%= link to: image_post_path(@conn, :new) do %>
+              <i class="fa fa-picture-o" aria-hidden="true"></i>
+            <% end %>
+          </li>
+          <li>
+            <%= link to: text_post_path(@conn, :new) do %>
               <i class="fa fa-plus" aria-hidden="true"></i>
             <% end %>
           </li>

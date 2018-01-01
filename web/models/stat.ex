@@ -4,7 +4,7 @@ defmodule Datjournaal.Stat do
   schema "stats" do
     field :unique_identifier, :string
     field :authenticated, :boolean
-    belongs_to :post, Datjournaal.Post
+    belongs_to :image_post, Datjournaal.ImagePost
     timestamps()
   end
 
@@ -13,7 +13,7 @@ defmodule Datjournaal.Stat do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:unique_identifier, :authenticated, :post_id])
+    |> cast(params, [:unique_identifier, :authenticated, :image_post_id])
     |> validate_required([:unique_identifier, :authenticated])
     |> unique_ip_address
   end

@@ -1,8 +1,8 @@
-defmodule Datjournaal.Post do
+defmodule Datjournaal.ImagePost do
   use Datjournaal.Web, :model
   use Arc.Ecto.Schema
 
-  schema "posts" do
+  schema "image_posts" do
     field :description, :string
     field :image, Datjournaal.Image.Type
     field :slug, :string
@@ -24,7 +24,7 @@ defmodule Datjournaal.Post do
     |> cast(params, [:description, :places_id])
     |> cast_attachments(params, [:image])
     |> validate_required([:image])
-    |> create_slug
+    |> create_slug()
     |> assoc_constraint(:user)
   end
 

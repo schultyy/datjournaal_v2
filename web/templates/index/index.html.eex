@@ -1,0 +1,28 @@
+<div class="tiles">
+  <%= for post <- @posts do %>
+    <div class="tile">
+      <div class="body">
+        <%= if Map.has_key?(post, :image) do %>
+          <%= render "image_post.html", conn: @conn, post: post %>
+        <% else %>
+          <%= render "text_post.html", conn: @conn, post: post %>
+        <% end %>
+      </div>
+      <div class="date">
+        <%= format_date(post.inserted_at) %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<nav>
+  <ul class="pagination">
+  <%= if @page_number - 1 >= 1 do %>
+    <li><%= link "<<", to: index_path(@conn, :index, "page": @page_number - 1) %></li>
+  <% end %>
+
+  <%= if @page_number + 1 <@total_pages do %>
+    <li><%= link ">>", to: index_path(@conn, :index, "page": @page_number + 1) %></li>
+  <% end %>
+  </ul>
+</nav>

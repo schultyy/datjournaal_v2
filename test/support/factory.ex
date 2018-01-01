@@ -13,11 +13,20 @@ defmodule Datjournaal.Factory do
   end
 
   def post_factory do
-    %Datjournaal.Post {
+    %Datjournaal.ImagePost {
       description: "Dies, Das",
       image: %Plug.Upload{ path: "test/fixtures/placeholder.jpg", filename: "placeholder.jpg" },
       user: build(:user),
       slug: "12345"
+    }
+  end
+
+  def text_post_factory do
+    %Datjournaal.TextPost {
+      content: "Dies, Das, Ananas",
+      title: "Dieses und jenes",
+      user: build(:user),
+      slug: "467567"
     }
   end
 end

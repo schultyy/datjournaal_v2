@@ -15,7 +15,7 @@ defmodule Datjournaal.TrackingControllerTest do
   test "POST /api/v1/visit/:id creates new log entry", %{ conn: conn, post: post } do
     post conn, "/api/v1/visit/#{post.slug}"
     stat = Repo.one(from x in Datjournaal.Stat, order_by: [desc: x.id], limit: 1)
-    assert stat.post_id == post.id
+    assert stat.image_post_id == post.id
     assert stat.authenticated == false
   end
 
@@ -31,7 +31,7 @@ defmodule Datjournaal.TrackingControllerTest do
     conn = conn |> guardian_login(current_user)
     post conn, "/api/v1/visit/#{post.slug}"
     stat = Repo.one(from x in Datjournaal.Stat, order_by: [desc: x.id], limit: 1)
-    assert stat.post_id == post.id
+    assert stat.image_post_id == post.id
     assert stat.authenticated == true
   end
 end

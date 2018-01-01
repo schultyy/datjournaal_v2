@@ -3,7 +3,7 @@
   <div class="posts">
     <%= for { post, visit_count } <- @my_posts do %>
       <div class="post">
-        <%= link to: post_path(@conn, :show, post.slug) do %>
+        <%= link to: index_path(@conn, :show_image, post.slug) do %>
           <img src="<%= photo_url(post) %>" />
           <div class="visits">
             <%= visit_count %>

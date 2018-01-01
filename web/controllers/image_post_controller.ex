@@ -1,13 +1,13 @@
-defmodule Datjournaal.PostController do
+defmodule Datjournaal.ImagePostController do
   use Datjournaal.Web, :controller
   import Ecto.Changeset
-  alias Datjournaal.Post
+  alias Datjournaal.ImagePost
 
-  plug :scrub_params, "post" when action in [:create]
+  plug :scrub_params, "image_post" when action in [:create]
 
   def index(conn, params) do
     posts =
-      Post
+      ImagePost
       |> order_by(desc: :inserted_at)
       |> preload(:user)
       |> Repo.paginate(params)
@@ -22,16 +22,16 @@ defmodule Datjournaal.PostController do
 
   def new(conn, _params) do
     current_user = conn.assigns.current_user
-    changeset = Post.changeset(%Post{})
+    changeset = ImagePost.changeset(%ImagePost{})
     render(conn, "new.html", %{changeset: changeset, current_user: Repo.preload(current_user, :twitterkey)})
   end
 
-  def create(conn, %{"post" => post_params}) do
+  def create(conn, %{"image_post" => post_params}) do
     current_user = conn.assigns.current_user
 
     changeset = current_user
-                |> build_assoc(:posts)
-                |> Post.changeset(post_params)
+                |> build_assoc(:image_posts)
+                |> ImagePost.changeset(post_params)
                 |> fetch_location
 
     create_tweet = Map.get(post_params, "post_on_twitter")
@@ -42,37 +42,32 @@ defmodule Datjournaal.PostController do
         post_to_twitter(create_tweet, post_with_user)
         conn
         |> put_flash(:info, "Post created successfully.")
-        |> redirect(to: post_path(conn, :index))
+        |> redirect(to: index_path(conn, :index))
       {:error, changeset} ->
         render(conn, "new.html", %{ changeset: changeset, current_user: Repo.preload(current_user, :twitterkey) })
     end
   end
 
-  def show(conn, %{"slug" => slug}) do
-    post = Repo.get_by!(Post, slug: slug) |> Repo.preload(:user)
-    render(conn, "show.html", post: post)
-  end
-
   def edit(conn, %{"id" => id}) do
-    post = Repo.get!(Post, id)
-    changeset = Post.changeset(post)
+    post = Repo.get!(ImagePost, id)
+    changeset = ImagePost.changeset(post)
     render(conn, "edit.html", post: post, changeset: changeset)
   end
 
   def delete(conn, %{"id" => slug}) do
     current_user = conn.assigns.current_user
-    post = Repo.get_by!(Post, slug: slug)
+    post = Repo.get_by!(ImagePost, slug: slug)
 
     cond do
       post.user_id == current_user.id ->
         Repo.delete!(post)
         conn
         |> put_flash(:info, "Post deleted successfully.")
-        |> redirect(to: post_path(conn, :index))
+        |> redirect(to: index_path(conn, :index))
       true ->
         conn
         |> put_flash(:error, "You cannot delete posts which don't belong to you")
-        |> redirect(to: post_path(conn, :show, post.slug))
+        |> redirect(to: index_path(conn, :show_image, post.slug))
     end
   end
 

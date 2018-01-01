@@ -70,7 +70,7 @@ $(document).ready(function() {
       $(searchArea).css({ display: 'block' });
     } else {
       $(searchArea).hide();
-      $('#post_places_id').val('');
+      $('#image_post_places_id').val('');
       $('.location-results').empty();
       $('.location-search-bar').val('');
     }
@@ -133,7 +133,7 @@ Location.prototype.onClick = function(event) {
   }
 
   $(this.domElement).addClass('selected');
-  $('#post_places_id').val(this.placesId);
+  $('#image_post_places_id').val(this.placesId);
 };
 
 Location.prototype.deselect = function() {
