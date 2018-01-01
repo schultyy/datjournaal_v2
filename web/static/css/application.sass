@@ -335,12 +335,42 @@ main
   h1
     display: block
     text-align: center
-  .posts
+  .image-posts
     display: flex
     flex-direction: row
     justify-content: center
     flex-wrap: wrap
-  .post
+  .text-posts
+    display: flex
+    flex-direction: column
+    align-content: flex-end
+  .text-post
+    display: flex
+    flex-direction: row
+    justify-content: space-around
+    border-bottom: 0.1px solid black
+    a:visited
+      color: black
+    a:link
+      color: black
+    a
+      h6
+        font-size: 12px
+        width: 120px
+        white-space: pre-wrap
+    .visits
+      align-self: center
+      color: $footer-foreground-color
+      background-color: $stat-visits-background-color
+      text-align: center
+      font-size: 10px
+      opacity: 0.8
+      padding: 5px
+      border-radius: 3px
+      width: 20px
+      height: 20px
+
+  .image-post
     position: relative
     img
       width: auto
