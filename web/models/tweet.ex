@@ -46,6 +46,6 @@ defmodule Datjournaal.Tweet do
   end
 
   defp prefix do
-    "📸 "
+    "📣 "
   end
 end

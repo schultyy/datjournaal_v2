@@ -21,7 +21,7 @@ defmodule Datjournaal.TweetTest do
     text = Tweet.to_tweet(url, post.text)
           |> String.split("\n")
           |> List.first
-    assert text == "📸 " <> tweet_text
+    assert text == "📣 " <> tweet_text
   end
 
   test "Tweet with short text does not contain three dots" do
@@ -33,13 +33,13 @@ defmodule Datjournaal.TweetTest do
   test "Tweet starts with camera emoji" do
     post = %{slug: UUID.uuid4(:hex), text: "Amsterdam Centraal, mit Zug"}
     url = post |> Tweet.to_url
-    assert String.first(Tweet.to_tweet(url, post.text)) == "📸"
+    assert String.first(Tweet.to_tweet(url, post.text)) == "📣"
   end
 
   test "Tweet where text is nil does not crash" do
     post = %{slug: UUID.uuid4(:hex), text: nil}
     url = post |> Tweet.to_url
-    assert Tweet.to_tweet(url, post.text) == "📸 \n#{url}"
+    assert Tweet.to_tweet(url, post.text) == "📣 \n#{url}"
   end
 
   test "Location shall be included in the tweet" do
@@ -58,24 +58,24 @@ defmodule Datjournaal.TweetTest do
   test "Tweet contains just the location when text is empty" do
     post = %{slug: UUID.uuid4(:hex), text: "", location: "Hamburg, CCH"}
     url = post |> Tweet.to_url
-    assert String.contains?(Tweet.to_tweet(url, post.text, post.location), "📸 @ Hamburg, CCH")
+    assert String.contains?(Tweet.to_tweet(url, post.text, post.location), "📣 @ Hamburg, CCH")
   end
 
   test "Tweet where location is nil should generate normal tweet" do
     post = %{slug: UUID.uuid4(:hex), text: "Lorem ipsum dolor sit amet", location: nil}
     url = post |> Tweet.to_url
-    assert Tweet.to_tweet(url, post.text, post.location) == "📸 Lorem ipsum dolor sit amet\n#{url}"
+    assert Tweet.to_tweet(url, post.text, post.location) == "📣 Lorem ipsum dolor sit amet\n#{url}"
   end
 
   test "Tweet with location where text is nil should generate tweet" do
     post = %{slug: UUID.uuid4(:hex), text: nil, location: "Hamburg, CCH"}
     url = post |> Tweet.to_url
-    assert Tweet.to_tweet(url, post.text, post.location) == "📸 @ Hamburg, CCH\n#{url}"
+    assert Tweet.to_tweet(url, post.text, post.location) == "📣 @ Hamburg, CCH\n#{url}"
   end
 
   test "Tweet where location is nil and where text is nil should generate tweet with url" do
     post = %{slug: UUID.uuid4(:hex), text: nil, location: nil}
     url = post |> Tweet.to_url
-    assert Tweet.to_tweet(url, post.text, post.location) == "📸 \n#{url}"
+    assert Tweet.to_tweet(url, post.text, post.location) == "📣 \n#{url}"
   end
 end
