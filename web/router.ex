@@ -58,6 +58,7 @@ defmodule Datjournaal.Router do
       end
       scope "v1" do
         post "/visit/image/:id", TrackingController, :log_image_visit
+        post "/visit/text/:id", TrackingController, :log_text_visit
       end
     end
   end
