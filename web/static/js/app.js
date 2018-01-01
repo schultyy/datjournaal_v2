@@ -18,7 +18,7 @@ $(document).ready(function() {
     if(!slug) {
       return;
     }
-    var request = new Request('/api/v1/visit/' + slug, {method: 'POST', credentials: 'same-origin'});
+    var request = new Request('/api/v1/visit/image/' + slug, {method: 'POST', credentials: 'same-origin'});
     fetch(request);
   }
   catch(err) {

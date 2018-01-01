@@ -3,13 +3,13 @@ defmodule Datjournaal.TrackingController do
 
   alias Datjournaal.{Repo, ImagePost}
 
-  def log_visit(conn, %{ "id" => slug}) do
+  def log_image_visit(conn, %{ "id" => slug}) do
     Repo.get_by!(ImagePost, slug: slug)
-    |> create_visit(conn)
+    |> create_image_visit(conn)
     render(conn, "tracking.json", %{})
   end
 
-  defp create_visit(post, conn) do
+  defp create_image_visit(post, conn) do
     authenticated = conn.assigns.current_user != nil
     stats = Datjournaal.ImageStat.changeset(%Datjournaal.ImageStat{}, %{
       unique_identifier: retrieve_ip_address(conn),
