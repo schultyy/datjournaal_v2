@@ -18,11 +18,11 @@
 <nav>
   <ul class="pagination">
   <%= if @page_number - 1 >= 1 do %>
-    <li><%= link "<<", to: image_post_path(@conn, :index, "page": @page_number - 1) %></li>
+    <li><%= link "<<", to: index_path(@conn, :index, "page": @page_number - 1) %></li>
   <% end %>
 
   <%= if @page_number + 1 <@total_pages do %>
-    <li><%= link ">>", to: image_post_path(@conn, :index, "page": @page_number + 1) %></li>
+    <li><%= link ">>", to: index_path(@conn, :index, "page": @page_number + 1) %></li>
   <% end %>
   </ul>
 </nav>
