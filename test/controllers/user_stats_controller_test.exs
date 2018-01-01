@@ -10,7 +10,7 @@ defmodule Datjournaal.UserStatsControllerTest do
     image_stats = Datjournaal.ImageStat.changeset(%Datjournaal.ImageStat{}, %{
       unique_identifier: "127.0.0.1",
       authenticated: false,
-      image_post_id: post.id
+      image_post_id: image_post.id
     })
     Repo.insert!(image_stats)
 
