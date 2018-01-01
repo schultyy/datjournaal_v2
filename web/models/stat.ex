@@ -1,7 +1,7 @@
 defmodule Datjournaal.Stat do
   use Datjournaal.Web, :model
 
-  schema "stats" do
+  schema "image_stats" do
     field :unique_identifier, :string
     field :authenticated, :boolean
     belongs_to :image_post, Datjournaal.ImagePost
