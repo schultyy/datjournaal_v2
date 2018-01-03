@@ -29,6 +29,8 @@ jobs:
         - cp config/dev.exs.example config/prod.secret.exs
       script:
         - MIX_ENV=prod mix deps.get
+        - npm install
+        - ./node_modules/.bin/brunch build --production
         - MIX_ENV=prod mix compile
         - MIX_ENV=prod mix phoenix.digest
         - MIX_ENV=prod mix release
