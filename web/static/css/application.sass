@@ -146,8 +146,16 @@ main
             color: black
             text-decoration: none
         .content
-          text-align: center
-          margin-bottom: 15px
+          pre
+            text-align: center
+            margin-bottom: 15px
+            white-space: pre-wrap
+            margin-top: -30px
+            padding-top: 0px
+            padding-left: 5px
+            padding-right: 5px
+          pre:first-of-type
+            margin-top: 0px
       .date
         color: $tile-date-foreground-color
         font-style: italic
@@ -264,14 +272,24 @@ main
       flex-direction: column
       justify-content: space-around
       margin-bottom: 10px
+      input[type="text"]
+        font-size: 16px
       textarea
         height: 300px
+        padding-left: 5px
+        padding-right: 5px
+        width: 100%
+        outline: none
+        box-shadow: none
+        border: 1px solid black
+        resize: none
       .btn-submit
         margin-top: 15px
   .text-post-detail
     h1
       padding-left: 10px
       padding-right: 10px
+      text-align: left
     .date
       padding-left: 10px
       padding-right: 10px
@@ -285,8 +303,14 @@ main
       padding-right: 10px
       font-size: $description-font-size
       font-family: $description-font
+      display: flex
+      flex-direction: column
+      align-items: center
       pre
         white-space: pre-wrap
+        text-align: left
+        padding: 5px
+        margin-top: -30px
 
 .footer
   position: fixed
@@ -500,3 +524,13 @@ main
         .description
           max-width: 1200px
           font-size: $description-font-size * 2
+    .text-post-detail
+      display: flex
+      flex-direction: column
+      justify-content: center
+      align-content: center
+      h1
+        text-align: center
+      .content
+        pre
+          margin-top: 5px

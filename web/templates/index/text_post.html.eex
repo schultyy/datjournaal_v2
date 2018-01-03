@@ -6,5 +6,7 @@
 </div>
 
 <div class="content">
-  <%= teaser_text(@post.content) %>
+  <pre>
+    <%= teaser_text(@post.content) %>
+  </pre>
 </div>
