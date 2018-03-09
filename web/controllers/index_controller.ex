@@ -7,11 +7,7 @@ defmodule Datjournaal.IndexController do
 
     render conn,
           "index.html",
-          posts: posts,
-          page_number: posts.page_number,
-          page_size: posts.page_size,
-          total_pages: posts.total_pages,
-          total_entries: posts.total_entries
+          posts: posts
   end
 
   def show_image(conn, %{"slug" => slug}) do
