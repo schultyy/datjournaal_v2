@@ -20,6 +20,6 @@ defmodule Datjournaal.IndexRepositoryTest do
     insert_list(30, :text_post, %{ user: user })
     insert_list(30, :post, %{ user: user })
     paginated_result = IndexRepository.get_all(%{ page: 1, page_size: 25 })
-    assert length(paginated_result.entries) == 25
+    assert length(paginated_result) == 50
   end
 end

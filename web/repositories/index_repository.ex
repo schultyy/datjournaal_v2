@@ -23,7 +23,6 @@ defmodule Datjournaal.IndexRepository do
     Enum.sort(all_posts, fn(left, right) ->
       NaiveDateTime.compare(left.inserted_at, right.inserted_at) == :gt
     end)
-    |> Scrivener.paginate(pagination_config)
   end
 
   def get_all() do
@@ -42,5 +41,5 @@ defmodule Datjournaal.IndexRepository do
   end
 
   defp maybe_put_default_config(%{page: _page_number, page_size: _page_size} = params), do: params
-  defp maybe_put_default_config(_params), do: %Scrivener.Config{page_number: 1, page_size: 10}
+  defp maybe_put_default_config(_params), do: %Scrivener.Config{page_number: 1, page_size: 100}
 end
