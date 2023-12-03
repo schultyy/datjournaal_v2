@@ -7,6 +7,8 @@ cache:
 before_install:
   - cp config/dev.exs.example config/dev.exs
   - cp config/test.exs.example config/test.exs
+  - nvm install 8.7.0
+  - nvm use 8.7.0
 services:
   - postgresql
 env:
@@ -14,8 +16,21 @@ env:
     - PG_USERNAME: postgres
     - PG_PASSWORD:
     - PG_HOST: 127.0.0.1
-before_script:
-  - mix ecto.create
-  - mix ecto.reset
-  - MIX_ENV=test mix ecto.reset
-script: mix test
+jobs:
+  include:
+    - stage: test
+      before_script:
+        - mix ecto.create
+        - mix ecto.reset
+        - MIX_ENV=test mix ecto.reset
+      script: mix test
+    - stage: build a release
+      before_script:
+        - cp config/dev.exs.example config/prod.secret.exs
+      script:
+        - MIX_ENV=prod mix deps.get
+        - npm install
+        - ./node_modules/.bin/brunch build --production
+        - MIX_ENV=prod mix compile
+        - MIX_ENV=prod mix phoenix.digest
+        - MIX_ENV=prod mix release
